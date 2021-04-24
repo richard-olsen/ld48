@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelAssetController : MonoBehaviour
 {
+
 	[SerializeField]
 	private Transform _levelBeginPosition;
 	public Transform LevelBeginPosition => _levelBeginPosition;
