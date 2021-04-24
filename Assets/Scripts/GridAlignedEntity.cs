@@ -6,7 +6,6 @@ public class GridAlignedEntity : MonoBehaviour
 {
     protected int positionX;
     protected int positionY;
-    protected BoxCollider2D collider;
     protected Vector3 targetPosition;
     private Vector3 oldPosition;
 
@@ -14,7 +13,6 @@ public class GridAlignedEntity : MonoBehaviour
 
     protected void Awake()
     {
-        collider = GetComponent<BoxCollider2D>();
     }
 
     protected void UpdatePositions()
