@@ -23,13 +23,14 @@ public class HUDController : MonoBehaviour
 	[SerializeField]
 	private OxyMeterController _oxyMeterController = null;
 	[SerializeField]
-	private LayoutGroup _actionButtonContainer = null;
+	private ActionContainerController _actionButtonContainer = null;
 
 	#region Unity Messages
 
 	private void Start() { }
 
-	private void Update(){ }
+	private void Update(){ 
+	}
 
 	#endregion
 
