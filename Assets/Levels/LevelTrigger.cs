@@ -30,10 +30,10 @@ public class LevelTrigger : MonoBehaviour
 		switch (_triggerType)
 		{
 			case LvlTriggerType.NextLevel:
-				Level.LoadNextLevelAt(collision.transform.position);
+				Level.LoadNextLevelAt(transform.position);
 				break;
 			case LvlTriggerType.PreviousLevel:
-				Level.LoadPrevLevelAt(collision.transform.position);
+				Level.LoadPrevLevelAt(transform.position);
 				break;
 		}
 	}
