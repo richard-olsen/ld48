@@ -24,6 +24,11 @@ public class Player : GridAlignedEntity
 
     private void FixedUpdate()
     {
+        UpdatePositions();
+    }
+
+    public bool DoActions()
+    {
         float hor = Input.GetAxis("Horizontal");
         float ver = Input.GetAxis("Vertical");
 
@@ -40,11 +45,13 @@ public class Player : GridAlignedEntity
         if (ver > 0)
             moveY++;
 
-
         if (MoveAlongGrid(moveX, moveY))
-            oxygenPenalty++;
+        {
+            DepleteOxygen(1);
+            return true;
+        }
 
-        UpdatePositions();
+        return false;
     }
 
     // Update is called once per frame
@@ -93,6 +100,14 @@ public class Player : GridAlignedEntity
 
         if (oxygenLevel >= maxOxygenLevel)
             oxygenLevel = maxOxygenLevel;
+    }
+
+    public void DepleteOxygen(int oxygen)
+    {
+        oxygenLevel -= oxygen;
+
+        if (oxygenLevel < 0)
+            oxygenLevel = 0;
     }
 
     public int GetOxygenLevel()

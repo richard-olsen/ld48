@@ -21,21 +21,19 @@ public class EnemyPatrolSimple : GridEnemyBase
 
     private void FixedUpdate()
     {
-        if (decideTime >= 1.0f)
-        {
-            decideTime = 0;
-
-            if (positionX <= Mathf.Min(positionX1, positionX2))
-                canMove = true;
-            else if (positionX >= Mathf.Max(positionX1, positionX2))
-                canMove = false;
-
-            
-            MoveAlongGrid(canMove ? 1 : -1, 0);
-        }
-
-        decideTime += Time.deltaTime;
-
         UpdatePositions();
+    }
+
+    public override bool DoActions()
+    {
+        if (positionX <= Mathf.Min(positionX1, positionX2))
+            canMove = true;
+        else if (positionX >= Mathf.Max(positionX1, positionX2))
+            canMove = false;
+
+        if (MoveAlongGrid(canMove ? 1 : -1, 0))
+            return true;
+
+        return false;
     }
 }
