@@ -21,23 +21,15 @@ public class HUDController : MonoBehaviour
 	private Player _player;
 
 	[SerializeField]
-	private Slider _oxygenMeterSlider;
-
-	private void updateOxygenMeterLevel()
-	{
-		// get the oxygen level between 0 and 1
-		float oxDelta = (float)Player.GetOxygenLevel() / Player.GetMaxOxygenLevel();
-
-		// set the oxygen meter slider to the player's oxygen level
-		_oxygenMeterSlider.value = oxDelta;
-	}
+	private OxyMeterController _oxyMeterController = null;
+	[SerializeField]
+	private LayoutGroup _actionButtonContainer = null;
 
 	#region Unity Messages
 
-	private void Update()
-	{
-		updateOxygenMeterLevel();
-	}
+	private void Start() { }
+
+	private void Update(){ }
 
 	#endregion
 
