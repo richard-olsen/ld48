@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f9a439d3c06b72458aac5ad45e27e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2308968680401152912, guid: 387b000295957344f9a61b18a5b41cd2, type: 3}
+  player: {fileID: 0}
   playerAllowedMoves: 3
   enemiesAllowedMoves: 2
   enemies: []

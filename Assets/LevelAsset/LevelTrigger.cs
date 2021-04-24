@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum LvlTriggerType
 {
@@ -29,7 +30,10 @@ public class LevelTrigger : MonoBehaviour
 	[SerializeField]
 	private LayerMask _triggerLayers;
 
-	private static float cameraPanSpeed = 5;
+	[SerializeField]
+	private UnityEvent customTrigger;
+
+	private static readonly float cameraPanSpeed = 5;
 
 	private void FocusCamera()
 	{
