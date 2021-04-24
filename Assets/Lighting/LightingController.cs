@@ -40,6 +40,11 @@ public class LightingController : MonoBehaviour
 	[SerializeField, Tooltip("The lighting color at the low depth")]
 	private Color _dimColor = new Color(0, 0, 0);
 
+	[SerializeField, Tooltip("The color of the camera background when it's at the surface")]
+	private Color _camBGBright = new Color(100, 100, 100);
+	[SerializeField, Tooltip("The color of the camera background when it's at maximum sea depth")]
+	private Color _camBGDim = new Color(0, 0, 0);
+
 	/// <summary>
 	/// handles dimming the global lighting of the scene based on the specified position
 	/// </summary>
@@ -56,11 +61,15 @@ public class LightingController : MonoBehaviour
 
 		// get the appropriate color by interpolating between the two min and max depth lighting colors 
 		// and apply it to the global light
-		Color targetColor = Color.Lerp(_brightColor, _dimColor, delta);
-		GlobalLight.color = targetColor;
+		Color targetLightColor = Color.Lerp(_brightColor, _dimColor, delta);
+		GlobalLight.color = targetLightColor;
 
 		// change the light intensity based on how deep the camera is
 		GlobalLight.intensity = 1 - delta;
+
+		// interpolate between the two specified camera background colors for bright and dark
+		Color targetCamColor = Color.Lerp(_camBGBright, _camBGDim, delta);
+		TargetCam.backgroundColor = targetCamColor;
 	}
 
 	#region Unity Messages
