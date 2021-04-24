@@ -44,3 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetCam: {fileID: 0}
+  _globalLight: {fileID: 0}
+  _lowDepth: -100
+  _highDepth: 0
+  _brightColor: {r: 0.6179246, g: 0.76904476, b: 1, a: 1}
+  _dimColor: {r: 0.764151, g: 0.43614277, b: 0.6426294, a: 1}
