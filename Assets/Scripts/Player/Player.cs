@@ -9,8 +9,9 @@ public class Player : GridAlignedEntity
     private int oxygenLevel = 10;
     private int maxOxygenLevel = 10;
 
-    private float oxygenLoseTimer = 0;
-    private float timeTillLoseOxygen = 3.0f; // Ten seconds until player loses 1 oxygen point
+    private int oxygenPenalty = 0;
+    [SerializeField, Range(1,100)]
+    private int oxygenPenaltyTick = 3;
 
     [SerializeField]
     private Animator playerAnimator;
@@ -40,7 +41,8 @@ public class Player : GridAlignedEntity
             moveY++;
 
 
-        MoveAlongGrid(moveX, moveY);
+        if (MoveAlongGrid(moveX, moveY))
+            oxygenPenalty++;
 
         UpdatePositions();
     }
@@ -48,19 +50,11 @@ public class Player : GridAlignedEntity
     // Update is called once per frame
     void Update()
     {
-
-        oxygenLoseTimer += Time.deltaTime;
-        if (oxygenLoseTimer >= timeTillLoseOxygen)
+        if (oxygenPenalty >= oxygenPenaltyTick)
         {
-            oxygenLoseTimer = 0;
             oxygenLevel -= 1;
+            oxygenPenalty = 0;
         }
-
-
-        if (oxygenLevel > maxOxygenLevel)
-            oxygenLevel = maxOxygenLevel;
-
-        // Trigger event if oxygen level <= 0
 
         Vector3 animationPosition = targetPosition - transform.position;
 
