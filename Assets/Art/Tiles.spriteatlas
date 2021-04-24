@@ -30,17 +30,14 @@ SpriteAtlas:
       enableTightPacking: 1
     secondaryTextureSettings: {}
     variantMultiplier: 1
-    packables:
-    - {fileID: 2800000, guid: 98373e61263773447815fb988dfbcf32, type: 3}
-    totalSpriteSurfaceArea: 65536
+    packables: []
+    totalSpriteSurfaceArea: 0
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites:
-  - {fileID: 7482667652216324306, guid: 98373e61263773447815fb988dfbcf32, type: 3}
-  m_PackedSpriteNamesToIndex:
-  - Square
+  m_PackedSprites: []
+  m_PackedSpriteNamesToIndex: []
   m_RenderDataMap: {}
   m_Tag: Tiles
   m_IsVariant: 0
