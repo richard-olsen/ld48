@@ -6,6 +6,12 @@ public class GridAlignedEntity : MonoBehaviour
 {
     protected int positionX;
     protected int positionY;
+    protected BoxCollider2D collider;
+
+    protected void Awake()
+    {
+        collider = GetComponent<BoxCollider2D>();
+    }
 
     public void SnapToGrid()
     {
@@ -47,9 +53,10 @@ public class GridAlignedEntity : MonoBehaviour
         // Do some ray casting to see if entity can move into slot
         // Try to move to another slot if possible
         // Assuming everything is a bounding box filling the entire single grid space
-        RaycastHit2D ray = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), new Vector2(xOffset, yOffset).normalized, 1.0f);
+        RaycastHit2D[] rays = new RaycastHit2D[1];
+        int count = collider.Raycast(new Vector2(xOffset, yOffset).normalized, rays, 0.5f);
 
-        if (ray.collider != null) // Something exists in the targeted slot
+        if (count > 0 && !rays[0].collider.isTrigger) // Something exists in the targeted slot, ignoring triggers
         {
             // Try along 2 other axis
 
