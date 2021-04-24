@@ -7,10 +7,28 @@ public class GridAlignedEntity : MonoBehaviour
     protected int positionX;
     protected int positionY;
     protected BoxCollider2D collider;
+    protected Vector3 targetPosition;
+    private Vector3 oldPosition;
+
+    protected float interpolateTime = 1.0f;
 
     protected void Awake()
     {
         collider = GetComponent<BoxCollider2D>();
+    }
+
+    protected void UpdatePositions()
+    {
+        if (interpolateTime >= 1.0f)
+        {
+            oldPosition = targetPosition;
+            transform.position = targetPosition;
+            return;
+        }
+
+        transform.position = Vector3.Lerp(oldPosition, targetPosition, interpolateTime);
+
+        interpolateTime += Time.deltaTime * 3.0f;
     }
 
     public void SnapToGrid()
@@ -18,30 +36,50 @@ public class GridAlignedEntity : MonoBehaviour
         int x = Mathf.RoundToInt(transform.position.x - 0.5f);
         int y = Mathf.RoundToInt(transform.position.y - 0.5f);
 
-        MoveAlongX(x);
-        MoveAlongY(y);
+        SetAlongX(x);
+        SetAlongY(y);
     }
 
     public void MoveAlongX(int xOffset)
     {
-        Vector3 position = transform.position;
-
         positionX += xOffset;
 
-        position.x = (float)positionX + 0.5f;
+        targetPosition.x = (float)positionX + 0.5f;
 
-        transform.position = position;
+        interpolateTime = 0;
     }
 
     public void MoveAlongY(int yOffset)
     {
-        Vector3 position = transform.position;
-
         positionY += yOffset;
 
-        position.y = (float)positionY + 0.5f;
+        targetPosition.y = (float)positionY + 0.5f;
 
-        transform.position = position;
+        interpolateTime = 0;
+    }
+
+    public void SetAlongX(int x)
+    {
+        positionX = x;
+
+        targetPosition.x = (float)positionX + 0.5f;
+
+        oldPosition = targetPosition;
+        transform.position = targetPosition;
+
+        interpolateTime = 1.0f;
+    }
+
+    public void SetAlongY(int y)
+    {
+        positionY = y;
+
+        targetPosition.y = (float)positionY + 0.5f;
+
+        oldPosition = targetPosition;
+        transform.position = targetPosition;
+
+        interpolateTime = 1.0f;
     }
 
     // Returns true if movement is successful
@@ -49,31 +87,25 @@ public class GridAlignedEntity : MonoBehaviour
     {
         if (xOffset == 0 && yOffset == 0)
             return false;
+        if (interpolateTime < 1.0f)
+            return false;
+
+        if (xOffset != 0)
+            yOffset = 0;
 
         // Do some ray casting to see if entity can move into slot
         // Try to move to another slot if possible
         // Assuming everything is a bounding box filling the entire single grid space
-        RaycastHit2D[] rays = new RaycastHit2D[1];
-        int count = collider.Raycast(new Vector2(xOffset, yOffset).normalized, rays, 0.5f);
+        RaycastHit2D rays = Physics2D.Raycast(new Vector2(targetPosition.x, targetPosition.y), new Vector2(xOffset, yOffset).normalized, 0.5f, LayerMask.GetMask("Default"));
 
-        if (count > 0 && !rays[0].collider.isTrigger) // Something exists in the targeted slot, ignoring triggers
+        if (rays.collider != null && !rays.collider.isTrigger) // Has collision
         {
-            // Try along 2 other axis
-
-            if (xOffset == 0 || yOffset == 0)
-                return false; // No where else to try
-
-            if (MoveAlongGrid(xOffset, 0))
-                return true;
-            if (MoveAlongGrid(0, yOffset))
-                return true;
-
-            return false; // No where else to try
+            return false;
         }
 
+        oldPosition = targetPosition;
         MoveAlongX(xOffset);
         MoveAlongY(yOffset);
-
         return true;
     }
 }
