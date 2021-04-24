@@ -12,8 +12,8 @@ public class Player : GridAlignedEntity
     private float oxygenLoseTimer = 0;
     private float timeTillLoseOxygen = 3.0f; // Ten seconds until player loses 1 oxygen point
 
-    private bool canMoveX = true;
-    private bool canMoveY = true;
+    [SerializeField]
+    private Animator playerAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -29,31 +29,20 @@ public class Player : GridAlignedEntity
         int moveX = 0;
         int moveY = 0;
 
-        if (canMoveX)
-        {
-            if (hor < 0)
-                moveX--;
-            if (hor > 0)
-                moveX++;
+        if (hor < 0)
+            moveX--;
+        if (hor > 0)
+            moveX++;
 
-            canMoveX = false;
-        }
-        if (canMoveY)
-        {
-            if (ver < 0)
-                moveY--;
-            if (ver > 0)
-                moveY++;
+        if (ver < 0)
+            moveY--;
+        if (ver > 0)
+            moveY++;
 
-            canMoveY = false;
-        }
-
-        if (hor == 0)
-            canMoveX = true;
-        if (ver == 0)
-            canMoveY = true;
 
         MoveAlongGrid(moveX, moveY);
+
+        UpdatePositions();
     }
 
     // Update is called once per frame
@@ -72,6 +61,36 @@ public class Player : GridAlignedEntity
             oxygenLevel = maxOxygenLevel;
 
         // Trigger event if oxygen level <= 0
+
+        Vector3 animationPosition = targetPosition - transform.position;
+
+        // Worry about X first, then Y
+
+        if (animationPosition.x < -float.Epsilon)
+        {
+            playerAnimator.SetFloat("animX", -1);
+        }
+        else if (animationPosition.x > float.Epsilon)
+        {
+            playerAnimator.SetFloat("animX", 1);
+        }
+        else
+        {
+            playerAnimator.SetFloat("animX", 0);
+        }
+
+        if (animationPosition.y < -float.Epsilon)
+        {
+            playerAnimator.SetFloat("animY", -1);
+        }
+        else if (animationPosition.y > float.Epsilon)
+        {
+            playerAnimator.SetFloat("animY", 1);
+        }
+        else
+        {
+            playerAnimator.SetFloat("animY", 0);
+        }
     }
 
     public void GiveOxygen(int oxygen)
