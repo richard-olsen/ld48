@@ -202,7 +202,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Move
+  m_text: Spear Gun
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 836581e5b0fa57d49b8d39f4b73917a4, type: 2}
   m_sharedMaterial: {fileID: 1775957587144667684, guid: 836581e5b0fa57d49b8d39f4b73917a4, type: 2}
@@ -241,7 +241,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
