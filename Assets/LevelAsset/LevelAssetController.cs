@@ -46,7 +46,7 @@ public class LevelAssetController : MonoBehaviour
 		// instantiate the game object if it has not already been created
 		if (_nextLevel == null)
 		{
-			_nextLevel = Instantiate(_previousLevelPrefab);
+			_nextLevel = Instantiate(_nextLevelPrefab);
 		}
 
 		// enable and position the level game object
