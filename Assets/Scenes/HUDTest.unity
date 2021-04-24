@@ -385,7 +385,7 @@ MonoBehaviour:
   enemiesAllowedMoves: 2
   enemies:
   - enemy: {fileID: 303804569}
-    actionsLeft: 2
+    actionsLeft: 0
 --- !u!4 &851998786
 Transform:
   m_ObjectHideFlags: 0

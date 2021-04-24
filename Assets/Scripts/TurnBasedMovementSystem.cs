@@ -18,6 +18,7 @@ public class TurnBasedMovementSystem : MonoBehaviour
     public struct EnemyEntry
     {
         public GridEnemyBase enemy;
+        [HideInInspector]
         public int actionsLeft;
     }
 
@@ -39,12 +40,12 @@ public class TurnBasedMovementSystem : MonoBehaviour
     {
         aiTimer += Time.deltaTime;
 
-        if (playerActionsLeft > 0)
+        if (playerActionsLeft > 0 || enemies.Length == 0)
         {
             if (player.DoActions())
                 playerActionsLeft--;
 
-            if (playerActionsLeft == 0)
+            if (playerActionsLeft <= 0)
                 aiTimer = 0;
 
             return;
