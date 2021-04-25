@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3183140303585660714}
   - component: {fileID: 1541480551108962447}
   - component: {fileID: 2160583859679758081}
+  - component: {fileID: 1964412120890482232}
   m_Layer: 0
   m_Name: LevelTransition
   m_TagString: Untagged
@@ -70,6 +71,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff65b376b9dbd6a4a94610a1b0c6ad45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _parentLevel: {fileID: 0}
   _camFocusPoint: {fileID: 0}
   _targetLevelPrefab: {fileID: 0}
   _targetTransitionIndex: 0
+--- !u!114 &1964412120890482232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765588076475734882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c32de9c865eed4fa62a4e860b5a6bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoSnap: 1
+  slerp: 0
+  autoSnapTime: 0.1
+  offsetSnap: 1
