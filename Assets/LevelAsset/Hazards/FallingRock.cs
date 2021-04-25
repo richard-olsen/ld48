@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class FallingRock : MonoBehaviour
+public class FallingRock : MonoBehaviour, IInteractible
 {
 	private LevelAssetController _parentLevel;
 	public LevelAssetController ParentLevel => _parentLevel ?? (_parentLevel = transform.GetComponentInParent<LevelAssetController>());
@@ -13,6 +13,11 @@ public class FallingRock : MonoBehaviour
 
 	private bool _isFalling = false;
 	public bool IsFalling => _isFalling;
+
+	public void InteractWith(IInteractor interacto)
+	{
+		// TODO
+	}
 
 	[SerializeField]
 	private GridSnap _gridsnap;
