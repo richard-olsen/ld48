@@ -19,12 +19,6 @@ public class NibblerAI : GridEnemyBase
 
     public bool followingPlayer = false;
 
-	public override void Kill()
-	{
-        // TODO
-		throw new System.NotImplementedException("NibblerAI.Kill not implemented");
-	}
-
     public int oxygenDepletion = 2;
 
     private bool MadeItToTarget()

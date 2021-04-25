@@ -21,22 +21,44 @@ public class TurnBasedMovementSystem : MonoBehaviour
         public int actionsLeft;
     }
 
-    [SerializeField]
     private List<EnemyEntry> enemies;
+
+
+    public class RemoveEnemyEntry
+    {
+        public GridEnemyBase enemy;
+        public bool removeFromWorld;
+    }
+
+    private Queue<RemoveEnemyEntry> removeEnemy;
 
     private float aiTimer = 0;
 
     public void AddEnemy(GridEnemyBase enemy)
     {
-        if (enemies == null)
-            enemies = new List<EnemyEntry>();
-
         EnemyEntry entry = new EnemyEntry();
 
         entry.enemy = enemy;
         entry.actionsLeft = enemiesAllowedMoves;
 
         enemies.Add(entry);
+    }
+
+    public void RemoveEnemy(GridEnemyBase enemy, bool removeObject)
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            EnemyEntry entry = enemies[i];
+
+            if (entry.enemy == enemy)
+            {
+                RemoveEnemyEntry rmEntry = new RemoveEnemyEntry();
+                rmEntry.enemy = enemy;
+                rmEntry.removeFromWorld = removeObject;
+                removeEnemy.Enqueue(rmEntry);
+                break;
+            }
+        }
     }
 
     public void ClearEnemies()
@@ -46,17 +68,18 @@ public class TurnBasedMovementSystem : MonoBehaviour
 
     public void ResetMoves()
     {
-        if (enemies == null)
-            enemies = new List<EnemyEntry>();
-
         playerActionsLeft = playerAllowedMoves;
         for (int i = 0; i < enemies.Count; i++)
         {
             EnemyEntry entry = enemies[i];
             entry.actionsLeft = enemiesAllowedMoves;
         }
+    }
 
-        Debug.Log("What's calling this");
+    private void Awake()
+    {
+        enemies = new List<EnemyEntry>();
+        removeEnemy = new Queue<RemoveEnemyEntry>();
     }
 
     void Start()
@@ -105,6 +128,26 @@ public class TurnBasedMovementSystem : MonoBehaviour
             entry.actionsLeft = entry.actionsLeft - actions;
 
             return;
+        }
+
+        // Remove all dead enemies or enemies that need to be removed
+
+        while (removeEnemy.Count > 0)
+        {
+            RemoveEnemyEntry enemy = removeEnemy.Dequeue();
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].enemy == enemy.enemy)
+                {
+                    Debug.Log("Remove Enemny");
+                    enemies.RemoveAt(i);
+
+                    if (enemy.removeFromWorld)
+                        Destroy(enemy.enemy.gameObject);
+
+                    break;
+                }
+            }
         }
 
         ResetMoves();
