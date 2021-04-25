@@ -38,12 +38,12 @@ public class ActionContainerController : MonoBehaviour
 		return abCont;
 	}
 
-	public void Show()
+	public void Open()
 	{
 		gameObject.SetActive(true);
 	}
 
-	public void Hide()
+	public void Close()
 	{
 		gameObject.SetActive(false);
 	}

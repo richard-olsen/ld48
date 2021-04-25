@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 277c8c6d9e6303549aa8a6fc59bc0800, type: 3}
-  m_Name: Move
+  m_Name: Interact
   m_EditorClassIdentifier: 
-  _actionTitle: Move
-  _oxygenCost: 1
+  _actionTitle: Interact
+  _oxygenCost: 0

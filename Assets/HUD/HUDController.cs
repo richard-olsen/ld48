@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 #if UNITY_EDITOR
 // access unity editor scripting
@@ -21,13 +22,20 @@ public class HUDController : MonoBehaviour
 	private Player _player;
 
 	[SerializeField]
+	private EventSystem _eventSys;
+	public EventSystem EventSys => _eventSys;
+
+	[SerializeField]
 	private OxyMeterController _oxyMeterController = null;
 	[SerializeField]
 	private ActionContainerController _actionButtonContainer = null;
+	public ActionContainerController ActionButtonContainer => _actionButtonContainer;
 
 	#region Unity Messages
 
-	private void Start() { }
+	private void Start() {
+		Player.GetComponent<PlayerInteraction>().HUD = this;
+	}
 
 	private void Update(){ 
 	}
