@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class SquidyAI : GridEnemyBase
 {
-	public override void Kill()
-	{
-        // TODO
-		throw new System.NotImplementedException("SquidyAI.Kill() not implemented");
-	}
-
-	[SerializeField]
+    [SerializeField]
     private GameObject circle;
     IEnumerator CircleVisual()
     {
         circle.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         circle.SetActive(false);
+
     }
     public override int DoActions(int actionsLeft)
     {
