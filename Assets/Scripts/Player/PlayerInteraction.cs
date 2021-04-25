@@ -202,22 +202,30 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 				}
 			}
 
+			// called when interaction was successful
+			void finishInteract()
+			{
+
+				IEnumerator finishAfterWait()
+				{
+					gs.SnapToCell(targetCell, 0.4f);
+					yield return new WaitForSeconds(0.25f);
+					EndInteractCycle();
+					yield break;
+				}
+
+				StartCoroutine(finishAfterWait());
+			}
+
 			// if the interactible can be moved to the target position
 			if (canMove)
 			{
 				if (playerInWay)
 				{
 					if (PlayerComponent.MoveAlongGrid(curMove.x, curMove.y))
-					{
-						gs.SnapToCell(targetCell, 0.4f);
-						EndInteractCycle();
-					}
+						finishInteract();
 				}
-				else
-				{
-					gs.SnapToCell(targetCell, 0.4f);
-					EndInteractCycle();
-				}
+				else finishInteract();
 			}
 		}
 	}
