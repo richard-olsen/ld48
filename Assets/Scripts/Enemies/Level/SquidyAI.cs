@@ -6,6 +6,22 @@ public class SquidyAI : GridEnemyBase
 {
     [SerializeField]
     private GameObject circle;
+    [SerializeField]
+    private float radius;
+
+    [SerializeField]
+    private float damageToDeal = 7.0f;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        Vector3 scale = circle.transform.localScale;
+        scale.x = radius * 2f;
+        scale.y = radius * 2f;
+        circle.transform.localScale = scale;
+    }
+
     IEnumerator CircleVisual()
     {
         circle.SetActive(true);
@@ -15,11 +31,11 @@ public class SquidyAI : GridEnemyBase
     }
     public override int DoActions(int actionsLeft)
     {
-        if (PlayerDistance <= 5.0f && actionsLeft >= 2)
+        if (PlayerDistance <= radius && actionsLeft >= 2)
         {
             StartCoroutine(CircleVisual());
 
-            player.DepleteOxygen(3);
+            player.Damage(damageToDeal);
             return 2;
         }
 
