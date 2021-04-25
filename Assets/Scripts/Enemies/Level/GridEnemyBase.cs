@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.Assertions;
 
 [RequireComponent(typeof(Animator))]
-public abstract class GridEnemyBase : GridAlignedEntity
+public abstract class GridEnemyBase : GridAlignedEntity, IDamageable
 {
     protected Player player;
     [Tooltip("The Tilemap of the level for pathfinding")]
@@ -19,11 +19,48 @@ public abstract class GridEnemyBase : GridAlignedEntity
 
     protected Animator animator;
 
+    // can only be damaged while _canBeDamaged is true
+    protected bool _canBeDamaged = true;
+    public bool CanBeDamaged => _canBeDamaged;
+
     protected float PlayerDistance => (position - playerPos).magnitude;
 
+    [SerializeField]
+    protected float _maxHealth = 10f;
+    public float MaxHealth => _maxHealth;
+
+    /// <summary>
+    /// how much health the character has left before they die
+    /// </summary>
+    public float Health => _health;
+    protected float _health;
+
+    /// <summary>
+    /// whether or not the enemy is currently alive
+    /// </summary>
+    public bool IsAlive => _health > 0;
+
+    /// <summary>
+    /// causes the enemy to take damage
+    /// </summary>
+    /// <param name="damage">the amount of damage that the enemy should take</param>
+    public virtual void Damage(float damage)
+	{
+        _health -= damage;
+		if (!IsAlive)
+		{
+            Kill();
+		}
+	}
+
+    /// <summary>
+    /// Kills the enemy
+    /// </summary>
+    public abstract void Kill();
+
     protected virtual void Start()
-    {
-        animator = GetComponent<Animator>();
+    {        
+		animator = GetComponent<Animator>();
         pathfinder = new Pathfinding(map);
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");

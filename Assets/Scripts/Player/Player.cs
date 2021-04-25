@@ -2,12 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : GridAlignedEntity
+public class Player : GridAlignedEntity, IDamageable
 {
+    public float Health => oxygenLevel;
+    public float MaxHealth => maxOxygenLevel;
+
+    public bool CanBeDamaged => true;
+    public bool IsAlive => Health > 0;
+
+
     // I'll leave these as integers for now
+    // no.
     [SerializeField]
-    private int oxygenLevel = 10;
-    private int maxOxygenLevel = 10;
+    private float maxOxygenLevel = 25;
+    private float oxygenLevel; // is set in Start()
 
     [SerializeField]
     private Animator playerAnimator;
@@ -18,6 +26,7 @@ public class Player : GridAlignedEntity
     protected void Start()
     {
         SnapToGrid();
+        oxygenLevel = maxOxygenLevel;
     }
 
     protected void FixedUpdate()
@@ -88,7 +97,25 @@ public class Player : GridAlignedEntity
         }
     }
 
-    public void GiveOxygen(int oxygen)
+    public void Damage(float damage)
+	{
+        if (damage < 0)
+            GiveOxygen(-damage);
+        else
+            DepleteOxygen(damage);
+
+        // kill if health/oxygen goes to or below 0
+        if (!IsAlive)
+            Kill();
+	}
+
+    public void Kill()
+	{
+        // TODO
+        throw new System.NotImplementedException("Player.Kill() is not implemented");
+	}
+
+    public void GiveOxygen(float oxygen)
     {
         oxygenLevel += oxygen;
 
@@ -96,7 +123,7 @@ public class Player : GridAlignedEntity
             oxygenLevel = maxOxygenLevel;
     }
 
-    public void DepleteOxygen(int oxygen)
+    public void DepleteOxygen(float oxygen)
     {
         oxygenLevel -= oxygen;
 
@@ -104,12 +131,12 @@ public class Player : GridAlignedEntity
             oxygenLevel = 0;
     }
 
-    public int GetOxygenLevel()
+    public float GetOxygenLevel()
     {
         return oxygenLevel;
     }
 
-    public int GetMaxOxygenLevel()
+    public float GetMaxOxygenLevel()
     {
         return maxOxygenLevel;
     }
