@@ -20,6 +20,9 @@ public class Player : GridAlignedEntity, IDamageable
     [SerializeField]
     private Animator playerAnimator;
 
+    [SerializeField]
+    private float movementOxygenCost = 0.5f;
+
     public bool usingMenus;
 
     // Start is called before the first frame update
@@ -56,6 +59,7 @@ public class Player : GridAlignedEntity, IDamageable
 
             if (MoveAlongGrid(moveX, moveY))
             {
+                DepleteOxygen(movementOxygenCost);
                 return 1;
             }
         }
