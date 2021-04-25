@@ -241,6 +241,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b02141c8572899841b1a8b339e9dc5f2, type: 3}
+--- !u!4 &523789484 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2018248280748218228, guid: b02141c8572899841b1a8b339e9dc5f2, type: 3}
+  m_PrefabInstance: {fileID: 523789483}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1336411865
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 523789484}
+    m_Modifications:
+    - target: {fileID: 3690654120675337557, guid: 64f21c6127e3dc3499ad4988bc5c16c4, type: 3}
+      propertyPath: m_Name
+      value: Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 3690654120675337578, guid: 64f21c6127e3dc3499ad4988bc5c16c4, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3690654120675337578, guid: 64f21c6127e3dc3499ad4988bc5c16c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 3690654120675337578, guid: 64f21c6127e3dc3499ad4988bc5c16c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 3690654120675337578, guid: 64f21c6127e3dc3499ad4988bc5c16c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3690654120675337578, guid: 64f21c6127e3dc3499ad4988bc5c16c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3690654120675337578, guid: 64f21c6127e3dc3499ad4988bc5c16c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3690654120675337578, guid: 64f21c6127e3dc3499ad4988bc5c16c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3690654120675337578, guid: 64f21c6127e3dc3499ad4988bc5c16c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3690654120675337578, guid: 64f21c6127e3dc3499ad4988bc5c16c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3690654120675337578, guid: 64f21c6127e3dc3499ad4988bc5c16c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3690654120675337578, guid: 64f21c6127e3dc3499ad4988bc5c16c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 64f21c6127e3dc3499ad4988bc5c16c4, type: 3}
 --- !u!1001 &1340582992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -248,6 +310,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2474275753907533508, guid: 966bd4a2a6ec87d4992c8f5a8933c77c, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 2105190931}
     - target: {fileID: 5256831700677924559, guid: 966bd4a2a6ec87d4992c8f5a8933c77c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -472,6 +538,18 @@ PrefabInstance:
     - target: {fileID: 6482239246702203637, guid: 36d7e2bd17235714b8b832dfc20277db, type: 3}
       propertyPath: m_Name
       value: LitCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 6482239246702203638, guid: 36d7e2bd17235714b8b832dfc20277db, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6482239246702203638, guid: 36d7e2bd17235714b8b832dfc20277db, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.6208156
+      objectReference: {fileID: 0}
+    - target: {fileID: 6482239246702203638, guid: 36d7e2bd17235714b8b832dfc20277db, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.5801887
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36d7e2bd17235714b8b832dfc20277db, type: 3}

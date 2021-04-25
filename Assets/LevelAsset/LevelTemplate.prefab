@@ -44,10 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d02972aba79f3747a6d5272cd8befa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelBeginPosition: {fileID: 0}
-  _levelEndPosition: {fileID: 0}
-  _previousLevelPrefab: {fileID: 0}
-  _nextLevelPrefab: {fileID: 0}
+  _tilemap: {fileID: 1496246193833558491}
 --- !u!1 &1496246193833558488
 GameObject:
   m_ObjectHideFlags: 0
