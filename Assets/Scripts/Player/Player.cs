@@ -9,12 +9,10 @@ public class Player : GridAlignedEntity
     private int oxygenLevel = 10;
     private int maxOxygenLevel = 10;
 
-    private int oxygenPenalty = 0;
-    [SerializeField, Range(1,100)]
-    private int oxygenPenaltyTick = 3;
-
     [SerializeField]
     private Animator playerAnimator;
+
+    public bool usingMenus;
 
     // Start is called before the first frame update
     void Start()
@@ -29,26 +27,28 @@ public class Player : GridAlignedEntity
 
     public bool DoActions()
     {
-        float hor = Input.GetAxis("Horizontal");
-        float ver = Input.GetAxis("Vertical");
-
-        int moveX = 0;
-        int moveY = 0;
-
-        if (hor < 0)
-            moveX--;
-        if (hor > 0)
-            moveX++;
-
-        if (ver < 0)
-            moveY--;
-        if (ver > 0)
-            moveY++;
-
-        if (MoveAlongGrid(moveX, moveY))
+        if (!usingMenus)
         {
-            DepleteOxygen(1);
-            return true;
+            float hor = Input.GetAxis("Horizontal");
+            float ver = Input.GetAxis("Vertical");
+
+            int moveX = 0;
+            int moveY = 0;
+
+            if (hor < 0)
+                moveX--;
+            if (hor > 0)
+                moveX++;
+
+            if (ver < 0)
+                moveY--;
+            if (ver > 0)
+                moveY++;
+
+            if (MoveAlongGrid(moveX, moveY))
+            {
+                return true;
+            }
         }
 
         return false;
@@ -57,12 +57,6 @@ public class Player : GridAlignedEntity
     // Update is called once per frame
     void Update()
     {
-        if (oxygenPenalty >= oxygenPenaltyTick)
-        {
-            oxygenLevel -= 1;
-            oxygenPenalty = 0;
-        }
-
         Vector3 animationPosition = targetPosition - transform.position;
 
         // Worry about X first, then Y
