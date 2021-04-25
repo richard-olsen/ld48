@@ -73,7 +73,7 @@ public class LevelTransition : MonoBehaviour
 		}
 	}
 
-	public void DoTransition()
+	public void DoTransition(Player plr)
 	{
 		// do not hit the trigger more than once
 		if (_isTransitioning)
@@ -92,6 +92,9 @@ public class LevelTransition : MonoBehaviour
 			// get the target transition of the level INSTANCE, not the prefab
 			target = targetTransition;
 		}
+
+		// set the player's current level to the new level just transitioned to
+		plr.GetComponent<PlayerInteraction>().CurrentLevel = _targetLevelInstance;
 
 		// set the level's position to match up with the transition point of this instance
 		_targetLevelInstance.transform.position = transform.position - offset;
@@ -133,10 +136,10 @@ public class LevelTransition : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		// if it's a player that's colliding with it
-		if (collision.gameObject.GetComponent<Player>() != null)
+		Player plr = collision.gameObject.GetComponent<Player>();
+		if (plr != null)
 		{
-			DoTransition();
-			collision.gameObject.GetComponent<PlayerInteraction>().CurrentLevel = _targetLevelInstance;
+			DoTransition(plr);
 		}
 	}
 

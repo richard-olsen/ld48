@@ -50,6 +50,7 @@ public class PlayerInteraction : MonoBehaviour
 	{
 		_interactMode = PlayerInteractMode.SelectTile;
 		PlayerComponent.usingMenus = true;
+		WorldCursor.transform.parent = CurrentLevel.transform;
 		WorldCursor.gameObject.SetActive(true);
 		WorldCursor.transform.position = transform.position;
 		WorldCursor.SnapToGrid();
@@ -78,6 +79,10 @@ public class PlayerInteraction : MonoBehaviour
 
 	private void handleCursorMovement(Vector2Int curMove)
 	{
+		// only handle cursor movement if in selectTile mode
+		if (_interactMode != PlayerInteractMode.SelectTile)
+			return;
+
 		if (WorldCursor.IsSnapped)
 		{
 			if(curMove.magnitude > 0)
