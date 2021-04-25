@@ -132,10 +132,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetCam: {fileID: 6482239246702203638}
   _globalLight: {fileID: 6482239247580194441}
-  _lowDepth: -100
+  _lowDepth: -50
   _highDepth: 0
-  _brightColor: {r: 0.39285713, g: 0.6904763, b: 1, a: 1}
-  _dimColor: {r: 0.764151, g: 0.43614277, b: 0.6426294, a: 1}
+  _brightColor: {r: 0.7122642, g: 0.85334754, b: 1, a: 1}
+  _dimColor: {r: 0.22395365, g: 0.13697045, b: 0.509434, a: 1}
   _camBGBright: {r: 0.21017858, g: 0.36940482, b: 0.535, a: 1}
   _camBGDim: {r: 0.013090896, g: 0, b: 0.08, a: 1}
 --- !u!1 &6482239247580193142
