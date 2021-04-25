@@ -19,6 +19,8 @@ public abstract class GridEnemyBase : GridAlignedEntity, IDamageable
 
     protected Animator animator;
 
+    private TurnBasedMovementSystem turnBased;
+
     // can only be damaged while _canBeDamaged is true
     protected bool _canBeDamaged = true;
     public bool CanBeDamaged => _canBeDamaged;
@@ -56,7 +58,10 @@ public abstract class GridEnemyBase : GridAlignedEntity, IDamageable
     /// <summary>
     /// Kills the enemy
     /// </summary>
-    public abstract void Kill();
+    public virtual void Kill()
+    {
+        turnBased.RemoveEnemy(this, true);
+    }
 
     protected virtual void Start()
     {        
@@ -72,10 +77,12 @@ public abstract class GridEnemyBase : GridAlignedEntity, IDamageable
         player = playerObject.GetComponent<Player>();
         Assert.IsNotNull(player, "Player GameObject REQUIRES the Player class! Are you using the prefab?");
 
-        TurnBasedMovementSystem turnbased = turnBaseController.GetComponent<TurnBasedMovementSystem>();
-        Assert.IsNotNull(turnbased, "TurnBasedController REQUIRES the class! Are you using the prefab?");
+        turnBased = turnBaseController.GetComponent<TurnBasedMovementSystem>();
+        Assert.IsNotNull(turnBased, "TurnBasedController REQUIRES the class! Are you using the prefab?");
 
-        turnbased.AddEnemy(this);
+        turnBased.AddEnemy(this);
+
+        _health = _maxHealth;
 
         SnapToGrid();
     }
