@@ -19,26 +19,12 @@ public class NibblerAI : GridEnemyBase
 
     public bool followingPlayer = false;
 
-    public Player player;
-
-    public Vector2Int playerPos;
-    public Vector2Int lastPlayerPos;
-
-    private List<Pathfinding.PathNode> path;
-    private Pathfinding pathfinder;
-
 	public override void Kill()
 	{
         // TODO
 		throw new System.NotImplementedException("NibblerAI.Kill not implemented");
 	}
 
-	// Start is called before the first frame update
-	protected override void Start()
-    {
-        base.Start();
-        pathfinder = new Pathfinding(tiles);
-    }
     public int oxygenDepletion = 2;
 
     private bool MadeItToTarget()

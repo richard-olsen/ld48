@@ -8,11 +8,6 @@ public class EnemyChase : GridEnemyBase
     public int lastPlayerX = int.MaxValue;
     public int lastPlayerY = int.MaxValue;
 
-    public Tilemap map;
-
-    private Pathfinding pathfinder;
-    private List<Pathfinding.PathNode> path;
-
 	public override void Kill()
 	{
         // TODO
