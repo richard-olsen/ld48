@@ -5,22 +5,8 @@ using UnityEngine.Tilemaps;
 
 public class EnemyChase : GridEnemyBase
 {
-    public Player player;
     public int lastPlayerX = int.MaxValue;
     public int lastPlayerY = int.MaxValue;
-
-    public Tilemap map;
-
-    private Pathfinding pathfinder;
-    private List<Pathfinding.PathNode> path;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        SnapToGrid();
-
-        pathfinder = new Pathfinding(map);
-    }
 
     public override bool DoActions()
     {
