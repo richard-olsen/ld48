@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class TurnBasedMovementSystem : MonoBehaviour
 {
-    [SerializeField]
     private Player player;
 
     [SerializeField]
@@ -15,32 +15,66 @@ public class TurnBasedMovementSystem : MonoBehaviour
     private int enemiesAllowedMoves = 2;
 
     [System.Serializable]
-    public struct EnemyEntry
+    public class EnemyEntry
     {
         public GridEnemyBase enemy;
-        //[HideInInspector]
         public int actionsLeft;
     }
 
     [SerializeField]
-    private EnemyEntry[] enemies;
+    private List<EnemyEntry> enemies;
 
     private float aiTimer = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    public void AddEnemy(GridEnemyBase enemy)
     {
-        playerActionsLeft = playerAllowedMoves;
-        for (int i = 0; i < enemies.Length; i++)
-            enemies[i].actionsLeft = enemiesAllowedMoves;
+        if (enemies == null)
+            enemies = new List<EnemyEntry>();
+
+        EnemyEntry entry = new EnemyEntry();
+
+        entry.enemy = enemy;
+        entry.actionsLeft = enemiesAllowedMoves;
+
+        enemies.Add(entry);
     }
 
-    // Update is called once per frame
+    public void ClearEnemies()
+    {
+        enemies.Clear();
+    }
+
+    public void ResetMoves()
+    {
+        if (enemies == null)
+            enemies = new List<EnemyEntry>();
+
+        playerActionsLeft = playerAllowedMoves;
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            EnemyEntry entry = enemies[i];
+            entry.actionsLeft = enemiesAllowedMoves;
+        }
+
+        Debug.Log("What's calling this");
+    }
+
+    void Start()
+    {
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        Assert.IsNotNull(playerObject, "A player must exist in the scene!");
+
+        player = playerObject.GetComponent<Player>();
+        Assert.IsNotNull(player, "Player GameObject REQUIRES the Player class! Are you using the prefab?");
+
+        ResetMoves();
+    }
+
     void Update()
     {
         aiTimer += Time.deltaTime;
 
-        if (playerActionsLeft > 0 || enemies.Length == 0)
+        if (playerActionsLeft > 0 || enemies.Count == 0)
         {
             if (player.DoActions())
                 playerActionsLeft--;
@@ -51,9 +85,11 @@ public class TurnBasedMovementSystem : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < enemies.Length; i++)
+        for (int i = 0; i < enemies.Count; i++)
         {
-            if (enemies[i].actionsLeft == 0)
+            EnemyEntry entry = enemies[i];
+
+            if (entry.actionsLeft == 0)
             {
                 continue;
             }
@@ -63,16 +99,15 @@ public class TurnBasedMovementSystem : MonoBehaviour
 
             aiTimer = 0;
 
-            if (enemies[i].enemy.DoActions())
+            if (entry.enemy.DoActions())
             {
-                enemies[i].actionsLeft--;
+                entry.actionsLeft = entry.actionsLeft - 1;
             }
+
 
             return;
         }
 
-        playerActionsLeft = playerAllowedMoves;
-        for (int i = 0; i < enemies.Length; i++)
-            enemies[i].actionsLeft = enemiesAllowedMoves;
+        ResetMoves();
     }
 }

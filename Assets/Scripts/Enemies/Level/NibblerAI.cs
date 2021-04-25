@@ -19,12 +19,6 @@ public class NibblerAI : GridEnemyBase
 
     public bool followingPlayer = false;
 
-    // Start is called before the first frame update
-    protected override void Start()
-    {
-        base.Start();
-    }
-
     private bool MadeItToTarget()
     {
         return positionX == targetPositions[nextPatrolPoint].x && positionY == targetPositions[nextPatrolPoint].y;
@@ -32,9 +26,6 @@ public class NibblerAI : GridEnemyBase
 
     public override bool DoActions()
     {
-        playerPos.x = player.GetX();
-        playerPos.y = player.GetY();
-
         Vector2Int currentPos = new Vector2Int(positionX, positionY);
         bool firstFollowIteration = false;
 

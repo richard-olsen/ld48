@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.Assertions;
 
 [RequireComponent(typeof(Animator))]
 public abstract class GridEnemyBase : GridAlignedEntity
 {
-    public Player player;
+    protected Player player;
+    [Tooltip("The Tilemap of the level for pathfinding")]
     public Tilemap map;
 
     protected Pathfinding pathfinder;
@@ -17,16 +19,33 @@ public abstract class GridEnemyBase : GridAlignedEntity
 
     protected Animator animator;
 
-    // Start is called before the first frame update
     protected virtual void Start()
     {
-        SnapToGrid();
         animator = GetComponent<Animator>();
         pathfinder = new Pathfinding(map);
+
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        Assert.IsNotNull(playerObject, "A player must exist in the scene!");
+
+        GameObject turnBaseController = GameObject.FindGameObjectWithTag("TurnBaseController");
+        Assert.IsNotNull(turnBaseController, "A turn based controller must exist in the scene!");
+
+        player = playerObject.GetComponent<Player>();
+        Assert.IsNotNull(player, "Player GameObject REQUIRES the Player class! Are you using the prefab?");
+
+        TurnBasedMovementSystem turnbased = turnBaseController.GetComponent<TurnBasedMovementSystem>();
+        Assert.IsNotNull(turnbased, "TurnBasedController REQUIRES the class! Are you using the prefab?");
+
+        turnbased.AddEnemy(this);
+
+        SnapToGrid();
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
+        playerPos.x = player.GetX();
+        playerPos.y = player.GetY();
+
         UpdatePositions();
     }
 
