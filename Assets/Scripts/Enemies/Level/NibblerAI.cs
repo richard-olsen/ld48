@@ -29,8 +29,14 @@ public class NibblerAI : GridEnemyBase
     private List<Pathfinding.PathNode> path;
     private Pathfinding pathfinder;
 
-    // Start is called before the first frame update
-    protected override void Start()
+	public override void Kill()
+	{
+        // TODO
+		throw new System.NotImplementedException("NibblerAI.Kill not implemented");
+	}
+
+	// Start is called before the first frame update
+	protected override void Start()
     {
         base.Start();
         pathfinder = new Pathfinding(tiles);

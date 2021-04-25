@@ -53,6 +53,8 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 		_interactMode = PlayerInteractMode.OpenMenu;
 		PlayerComponent.usingMenus = false;
 		WorldCursor.gameObject.SetActive(false);
+		_currentAction = null;
+		_currentInteractible = null;
 	}
 
 	public void InteractWithWorld()

@@ -13,8 +13,14 @@ public class EnemyPatrolSimple : GridEnemyBase
     private float decideTime = 0;
     private bool canMove = false;
 
-    // Start is called before the first frame update
-    void Start()
+	public override void Kill()
+	{
+        // TODO
+		throw new System.NotImplementedException("EnemyPatrolSimple.Kill() no implemented");
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
         SnapToGrid();
     }

@@ -17,3 +17,15 @@ public interface IInteractor : IGameObjectable
 {
 
 }
+
+public interface IDamageable : IGameObjectable 
+{
+	public bool CanBeDamaged { get; }
+	public bool IsAlive { get; }
+
+	public float Health { get;  }
+	public float MaxHealth { get; }
+
+	public void Damage(float damage);
+	public void Kill();
+}

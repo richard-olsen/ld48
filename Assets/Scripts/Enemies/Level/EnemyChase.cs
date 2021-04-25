@@ -14,8 +14,14 @@ public class EnemyChase : GridEnemyBase
     private Pathfinding pathfinder;
     private List<Pathfinding.PathNode> path;
 
-    // Start is called before the first frame update
-    void Start()
+	public override void Kill()
+	{
+        // TODO
+		throw new System.NotImplementedException("EnemyChase.Kill() not implemented");
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
         SnapToGrid();
 
