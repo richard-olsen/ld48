@@ -16,6 +16,9 @@ public class PlayerInteraction : MonoBehaviour
 	private Player _playerComponent;
 	public Player PlayerComponent => _playerComponent ?? (_playerComponent = GetComponent<Player>());
 
+	private PlayerAction _currentAction;
+	public PlayerAction CurrentAction => _currentAction;
+
 	private HUDController _hud;
 	public HUDController HUD { get => _hud; set => _hud = value; }
 
@@ -28,13 +31,18 @@ public class PlayerInteraction : MonoBehaviour
 	public void InteractWithWorld()
 	{
 		_interactMode = PlayerInteractMode.SelectTile;
+		PlayerComponent.usingMenus = true;
 	}
 
 	public void SelectPlayerAction(PlayerAction action)
 	{
+		_currentAction = action;
 		switch (action.ActionType)
 		{
-			// TODO
+			case PlayerActionType.Interact:
+				InteractWithWorld();
+				actionButtons.Close();
+				break;
 		}
 	}
 
@@ -43,6 +51,7 @@ public class PlayerInteraction : MonoBehaviour
 		actionButtons.Open();
 		_interactMode = PlayerInteractMode.SelectAction;
 		HUD.EventSys.SetSelectedGameObject(actionButtons.GetAllButtons()[0].gameObject);
+		PlayerComponent.usingMenus = true;
 	}
 
 	private void handleInput()

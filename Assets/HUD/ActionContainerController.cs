@@ -33,6 +33,7 @@ public class ActionContainerController : MonoBehaviour
 		ActionButtonController abCont = Instantiate(_actionButtonPrefab);
 		abCont.SetPlayerAction(action);
 		abCont.transform.parent = transform;
+		abCont.HUDParent = _hud;
 
 		// return the instantiated button
 		return abCont;
@@ -46,5 +47,14 @@ public class ActionContainerController : MonoBehaviour
 	public void Close()
 	{
 		gameObject.SetActive(false);
+	}
+
+	private void OnEnable()
+	{
+		ActionButtonController[] buttons = GetAllButtons();
+		for(int i = buttons.Length - 1; i >= 0; i--)
+		{
+			buttons[i].HUDParent = _hud;
+		}
 	}
 }

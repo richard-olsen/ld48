@@ -4,8 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[RequireComponent(typeof(Button))]
 public class ActionButtonController : MonoBehaviour
 {
+	[SerializeField, HideInInspector]
+	private HUDController _hudParent;
+	public HUDController HUDParent { get => _hudParent; set => _hudParent = value; }
+
 	[SerializeField]
 	private PlayerAction _playerAction;
 
@@ -45,11 +50,25 @@ public class ActionButtonController : MonoBehaviour
 		Text = _playerAction.ActionTitle;
 	}
 
+	private void hookClickEvent()
+	{
+		// define button click action
+		void onclick() {
+			PlayerInteraction plrInt = _hudParent.Player.GetComponent<PlayerInteraction>();
+			plrInt.SelectPlayerAction(_playerAction);
+		};
+
+		// attach the event listener to the button's on click event
+		Button button = GetComponent<Button>();
+		button.onClick.AddListener(new UnityEngine.Events.UnityAction(onclick));
+	}
+
 	#region Unity Messages
 
 	private void OnEnable()
 	{
 		RefreshActionData();
+		hookClickEvent();
 	}
 
 	#endregion
