@@ -106,4 +106,13 @@ public class GridAlignedEntity : MonoBehaviour
         MoveAlongY(yOffset);
         return true;
     }
+
+    public int GetX()
+    {
+        return positionX;
+    }
+    public int GetY()
+    {
+        return positionY;
+    }
 }

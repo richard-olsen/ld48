@@ -18,7 +18,7 @@ public class TurnBasedMovementSystem : MonoBehaviour
     public struct EnemyEntry
     {
         public GridEnemyBase enemy;
-        [HideInInspector]
+        //[HideInInspector]
         public int actionsLeft;
     }
 
@@ -55,7 +55,6 @@ public class TurnBasedMovementSystem : MonoBehaviour
         {
             if (enemies[i].actionsLeft == 0)
             {
-                aiTimer = 0;
                 continue;
             }
 
@@ -65,7 +64,9 @@ public class TurnBasedMovementSystem : MonoBehaviour
             aiTimer = 0;
 
             if (enemies[i].enemy.DoActions())
+            {
                 enemies[i].actionsLeft--;
+            }
 
             return;
         }
