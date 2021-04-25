@@ -16,7 +16,11 @@ public class FallingRock : MonoBehaviour, IInteractible
 
 	public void InteractWith(IInteractor interactor)
 	{
-		// TODO
+		PlayerInteraction plrInter = interactor.gameObject.GetComponent<PlayerInteraction>();
+		if(plrInter != null)
+		{
+			plrInter.SelectInteractible(this);
+		}
 	}
 
 	[SerializeField]

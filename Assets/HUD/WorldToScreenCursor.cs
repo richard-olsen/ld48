@@ -1,10 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(Image))]
 public class WorldToScreenCursor : MonoBehaviour
 {
 	private Vector2 oSizeDelta;
+
+	[SerializeField]
+	private Sprite _selector;
+	[SerializeField]
+	private Sprite _director;
+	[SerializeField]
+	private Sprite _arrow;
 
 	[SerializeField]
 	private HUDController _hud;
@@ -12,8 +21,18 @@ public class WorldToScreenCursor : MonoBehaviour
 
 	private RectTransform rectTr => transform as RectTransform;
 
-	public void Show()
+	public void Show(int mode = 0)
 	{
+		// set the sprite
+		Image img = GetComponent<Image>();
+		switch (mode)
+		{
+			case 0: img.sprite = _selector; break;
+			case 1: img.sprite = _director; break;
+			case 2: img.sprite = _arrow; break;
+			default: img.sprite = _selector; break;
+		}
+
 		gameObject.SetActive(true);
 		followWorldCursor();
 	}

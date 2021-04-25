@@ -88,3 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc021eb3c2c6fc4b91dd3fd57b19ef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _selector: {fileID: 21300000, guid: 6562be730ea2bc54987641bf8e3b262f, type: 3}
+  _director: {fileID: 21300000, guid: ed18ea20a962c0e41a59a5e4738da69d, type: 3}
+  _arrow: {fileID: 21300000, guid: e4d572f88200c31488f950a0171f0009, type: 3}
+  _hud: {fileID: 0}

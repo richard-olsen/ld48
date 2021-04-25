@@ -6,7 +6,8 @@ public enum PlayerInteractMode
 {
 	OpenMenu,
 	SelectAction,
-	SelectTile,
+	SelectWorld,
+	Interactible,
 	ResumeGame
 }
 
@@ -32,6 +33,7 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 	private Player _playerComponent;
 	public Player PlayerComponent => _playerComponent ?? (_playerComponent = GetComponent<Player>());
 
+	private IInteractible _currentInteractible;
 	private PlayerAction _currentAction;
 	public PlayerAction CurrentAction => _currentAction;
 
@@ -46,15 +48,29 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 	private GridSnap _worldCursor = null;
 	public GridSnap WorldCursor => _worldCursor;
 
+	public void EndInteractCycle()
+	{
+		_interactMode = PlayerInteractMode.OpenMenu;
+		PlayerComponent.usingMenus = false;
+		WorldCursor.gameObject.SetActive(false);
+	}
+
 	public void InteractWithWorld()
 	{
-		_interactMode = PlayerInteractMode.SelectTile;
+		_interactMode = PlayerInteractMode.SelectWorld;
 		PlayerComponent.usingMenus = true;
 		WorldCursor.transform.parent = CurrentLevel.transform;
 		WorldCursor.gameObject.SetActive(true);
 		WorldCursor.transform.position = transform.position;
 		WorldCursor.SnapToGrid();
-		HUD.WorldScreenCursor.Show();
+		HUD.WorldScreenCursor.Show(0);
+	}
+
+	public void SelectInteractible(IInteractible interactible)
+	{
+		_currentInteractible = interactible;
+		_interactMode = PlayerInteractMode.Interactible;
+		HUD.WorldScreenCursor.Show(1);
 	}
 
 	public void SelectPlayerAction(PlayerAction action)
@@ -69,6 +85,27 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 		}
 	}
 
+	private void selectWorld(Vector3Int cellPos)
+	{
+		if (CurrentAction.ActionType == PlayerActionType.Interact)
+		{
+			// find any interactible objects at the cell that the player selected
+			Vector3 selectPos = CurrentLevel.Tilemap.layoutGrid.CellToWorld(cellPos) + CurrentLevel.Tilemap.layoutGrid.cellSize * 0.5f;
+			Collider2D[] colliders = Physics2D.OverlapBoxAll(selectPos, new Vector2(0.9f, 0.9f), 0);
+			for (int i = colliders.Length - 1; i >= 0; i--)
+			{
+				Collider2D collider = colliders[i];
+				IInteractible interactible = collider.GetComponent<IInteractible>();
+				if (interactible != null)
+				{
+					// interact with the interactible object that was found
+					interactible.InteractWith(this);
+					break;
+				}
+			}
+		}
+	}
+
 	private void openMenu()
 	{
 		actionButtons.Open();
@@ -77,16 +114,88 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 		PlayerComponent.usingMenus = true;
 	}
 
-	private void handleCursorMovement(Vector2Int curMove)
+	private void interact()
 	{
-		// only handle cursor movement if in selectTile mode
-		if (_interactMode != PlayerInteractMode.SelectTile)
+
+		switch (_interactMode)
+		{
+			case PlayerInteractMode.OpenMenu:
+				openMenu();
+				break;
+			case PlayerInteractMode.SelectAction:
+				// do nothing because the button has an event
+				break;
+			case PlayerInteractMode.SelectWorld:
+				selectWorld(WorldCursor.GetCellPosition());
+				break;
+		}
+	}
+
+	private void handleInteractMovement(Vector2Int curMove)
+	{
+		if (curMove.magnitude <= 0)
 			return;
 
-		if (WorldCursor.IsSnapped)
+		// only handle cursor movement if in selectTile mode
+		if (_interactMode == PlayerInteractMode.SelectWorld)
 		{
-			if(curMove.magnitude > 0)
-				WorldCursor.MoveCells((Vector3Int)curMove);
+			if (WorldCursor.IsSnapped)
+			{
+				Vector3Int targetCell = WorldCursor.GetCellPosition() + (Vector3Int)curMove;
+				Vector3Int plrCell = WorldCursor.grid.WorldToCell(transform.position);
+
+				// restrict movement to tiles only 1 cell away or closer
+				if (Mathf.Abs(targetCell.x - plrCell.x) > 1 || Mathf.Abs(targetCell.y - plrCell.y) > 1)
+					return;
+
+				WorldCursor.SnapToCell(targetCell, 0.15f);
+			}
+		}
+
+		// interact with physical objects
+		if (_interactMode == PlayerInteractMode.Interactible)
+		{
+			GridSnap gs = _currentInteractible.gameObject.GetComponent<GridSnap>();
+			Vector3Int targetCell = gs.GetCellPosition() + (Vector3Int)curMove;
+			Vector3 targetPos = gs.grid.CellToWorld(targetCell) + gs.cellOffset;
+
+			// check to see if player can move to taget position
+			Collider2D[] colliders = Physics2D.OverlapBoxAll(targetPos, new Vector2(0.9f, 0.9f), 0);
+			bool canMove = true;
+			bool playerInWay = false;
+			if (colliders.Length > 0)
+			{
+				foreach(Collider2D col in colliders)
+				{
+					if(col.gameObject.GetComponent<Player>() != null)
+					{
+						playerInWay = true;
+					}
+					else
+					{
+						canMove = false;
+						break;
+					}
+				}
+			}
+
+			// if the interactible can be moved to the target position
+			if (canMove)
+			{
+				if (playerInWay)
+				{
+					if (PlayerComponent.MoveAlongGrid(curMove.x, curMove.y))
+					{
+						gs.SnapToCell(targetCell, 0.4f);
+						EndInteractCycle();
+					}
+				}
+				else
+				{
+					gs.SnapToCell(targetCell, 0.4f);
+					EndInteractCycle();
+				}
+			}
 		}
 	}
 
@@ -95,15 +204,7 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 		bool interactPressed = Input.GetButtonDown("Interact");
 		if (interactPressed)
 		{
-			switch (_interactMode)
-			{
-				case PlayerInteractMode.OpenMenu:
-					openMenu();
-					break;
-				case PlayerInteractMode.SelectAction:
-					// do nothing because the button has an event
-					break;
-			}
+			interact();
 		}
 
 		float xIn = Input.GetAxis("Horizontal");
@@ -137,7 +238,7 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 				moveDown.y--;
 		}
 
-		handleCursorMovement(moveDown);
+		handleInteractMovement(moveDown);
 
 		// store last axis
 		_lastAxis = move;

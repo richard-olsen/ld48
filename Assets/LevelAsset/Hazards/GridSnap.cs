@@ -17,6 +17,7 @@ public class GridSnap : MonoBehaviour
 	public float autoSnapTime = 0.1f;
 	public bool offsetSnap = true;
 	public Vector3 cellOffset => offsetSnap ? ParentLevel.Tilemap.layoutGrid.cellSize * 0.5f : Vector3.zero;
+	public Grid grid => ParentLevel.Tilemap.layoutGrid;
 
 	public bool IsSnapped => _snapCoroutine == null && GetSnapDistance() < maxCellDistance;
 
@@ -71,7 +72,7 @@ public class GridSnap : MonoBehaviour
 		SnapToCell(grid.WorldToCell(transform.position), time);
 	}
 
-	private void SnapToCell(Vector3Int cell, float time)
+	public void SnapToCell(Vector3Int cell, float time)
 	{
 
 		// if the coroutine is running, stop it
