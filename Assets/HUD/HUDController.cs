@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 using UnityEditor;
 #endif
 
+[RequireComponent(typeof(Canvas))]
 public class HUDController : MonoBehaviour
 {
 	/// <summary>
@@ -25,11 +26,20 @@ public class HUDController : MonoBehaviour
 	private EventSystem _eventSys;
 	public EventSystem EventSys => _eventSys;
 
+	private Camera _camera;
+	public Camera Camera => _camera ?? (_camera = Camera.main);
+
+	private Canvas _canvas;
+	public Canvas CanvasComponent => _canvas ?? (_canvas = GetComponent<Canvas>());
+
 	[SerializeField]
 	private OxyMeterController _oxyMeterController = null;
 	[SerializeField]
 	private ActionContainerController _actionButtonContainer = null;
 	public ActionContainerController ActionButtonContainer => _actionButtonContainer;
+	[SerializeField]
+	private WorldToScreenCursor _worldScreenCursor;
+	public WorldToScreenCursor WorldScreenCursor => _worldScreenCursor;
 
 	#region Unity Messages
 
@@ -37,8 +47,7 @@ public class HUDController : MonoBehaviour
 		Player.GetComponent<PlayerInteraction>().HUD = this;
 	}
 
-	private void Update(){ 
-	}
+	private void Update(){ }
 
 	#endregion
 

@@ -101,6 +101,9 @@ public class GridSnap : MonoBehaviour
 				yield return null;
 			}
 
+			// apply the final destination
+			transform.position = destination;
+
 			// stop the coroutine
 			_snapCoroutine = null;
 			yield break;

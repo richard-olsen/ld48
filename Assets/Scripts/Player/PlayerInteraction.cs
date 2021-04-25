@@ -13,6 +13,22 @@ public enum PlayerInteractMode
 [RequireComponent(typeof(Player))]
 public class PlayerInteraction : MonoBehaviour
 {
+	private LevelAssetController _currentLevel;
+	public LevelAssetController CurrentLevel
+	{
+		get
+		{
+			if (_currentLevel == null || !_currentLevel.gameObject.activeInHierarchy)
+				_currentLevel = FindObjectOfType<LevelAssetController>();
+
+			return _currentLevel;
+		}
+		set
+		{
+			_currentLevel = value;
+		}
+	}
+
 	private Player _playerComponent;
 	public Player PlayerComponent => _playerComponent ?? (_playerComponent = GetComponent<Player>());
 
@@ -27,11 +43,17 @@ public class PlayerInteraction : MonoBehaviour
 	protected ActionContainerController actionButtons => HUD.ActionButtonContainer;
 
 	private PlayerInteractMode _interactMode = PlayerInteractMode.OpenMenu;
+	private GridSnap _worldCursor = null;
+	public GridSnap WorldCursor => _worldCursor;
 
 	public void InteractWithWorld()
 	{
 		_interactMode = PlayerInteractMode.SelectTile;
 		PlayerComponent.usingMenus = true;
+		WorldCursor.gameObject.SetActive(true);
+		WorldCursor.transform.position = transform.position;
+		WorldCursor.SnapToGrid();
+		HUD.WorldScreenCursor.Show();
 	}
 
 	public void SelectPlayerAction(PlayerAction action)
@@ -52,6 +74,15 @@ public class PlayerInteraction : MonoBehaviour
 		_interactMode = PlayerInteractMode.SelectAction;
 		HUD.EventSys.SetSelectedGameObject(actionButtons.GetAllButtons()[0].gameObject);
 		PlayerComponent.usingMenus = true;
+	}
+
+	private void handleCursorMovement(Vector2Int curMove)
+	{
+		if (WorldCursor.IsSnapped)
+		{
+			if(curMove.magnitude > 0)
+				WorldCursor.MoveCells((Vector3Int)curMove);
+		}
 	}
 
 	private void handleInput()
@@ -78,28 +109,50 @@ public class PlayerInteraction : MonoBehaviour
 		if (Mathf.Abs(yIn) > 0.5)
 			move.y += (int)Mathf.Sign(yIn);
 
+		Vector2Int moveDown = Vector2Int.zero;
+
 		if(_lastAxis.x != move.x)
 		{
 			// move right
-			if (move.x > 0) { }
+			if (move.x > 0)
+				moveDown.x++;
 
 			// move left
-			else if (move.x < 0) { }
+			else if (move.x < 0)
+				moveDown.x--;
 		}
 		if(_lastAxis.y != move.y)
 		{
 			// move up
-			if (move.y > 0) { }
+			if (move.y > 0)
+				moveDown.y++;
 
 			// move down
-			else if (move.y < 0) { }
+			else if (move.y < 0)
+				moveDown.y--;
 		}
+
+		handleCursorMovement(moveDown);
 
 		// store last axis
 		_lastAxis = move;
 	}
 
 	#region Unity Messages
+
+	private void OnEnable()
+	{
+		
+		if(_worldCursor == null)
+		{
+			_worldCursor = (new GameObject()).AddComponent<GridSnap>();
+			_worldCursor.name = "PlayerWorldCursor";
+			_worldCursor.slerp = true;
+			_worldCursor.autoSnap = false;
+			_worldCursor.gameObject.SetActive(false);
+		}
+		_worldCursor.transform.parent = CurrentLevel.transform;
+	}
 
 	private void Update()
 	{

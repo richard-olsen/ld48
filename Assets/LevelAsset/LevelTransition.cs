@@ -133,8 +133,11 @@ public class LevelTransition : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		// if it's a player that's colliding with it
-		if(collision.gameObject.GetComponent<Player>() != null)
+		if (collision.gameObject.GetComponent<Player>() != null)
+		{
 			DoTransition();
+			collision.gameObject.GetComponent<PlayerInteraction>().CurrentLevel = _targetLevelInstance;
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
