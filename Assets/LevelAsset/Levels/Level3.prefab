@@ -1371,7 +1371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2382735087734070221, guid: c471da784a405fb4c864ecdf7e39f6fc, type: 3}
       propertyPath: m_Name
-      value: LevelTrigger (2)
+      value: Trigger_Camera
       objectReference: {fileID: 0}
     - target: {fileID: 2991768638896183423, guid: c471da784a405fb4c864ecdf7e39f6fc, type: 3}
       propertyPath: m_RootOrder
@@ -1428,6 +1428,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2991768638896183423, guid: c471da784a405fb4c864ecdf7e39f6fc, type: 3}
   m_PrefabInstance: {fileID: 4886020056053924750}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5037996002324560490
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2018248280748218228}
+    m_Modifications:
+    - target: {fileID: 1765588076475734882, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
+      propertyPath: m_Name
+      value: LevelTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183140303585660714, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183140303585660714, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183140303585660714, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183140303585660714, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183140303585660714, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183140303585660714, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183140303585660714, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183140303585660714, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183140303585660714, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183140303585660714, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183140303585660714, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
 --- !u!1001 &7178505204169405573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1441,7 +1498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2382735087734070221, guid: c471da784a405fb4c864ecdf7e39f6fc, type: 3}
       propertyPath: m_Name
-      value: LevelTrigger (3)
+      value: Trigger_Camera
       objectReference: {fileID: 0}
     - target: {fileID: 2991768638896183423, guid: c471da784a405fb4c864ecdf7e39f6fc, type: 3}
       propertyPath: m_RootOrder
