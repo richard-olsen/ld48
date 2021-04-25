@@ -163,11 +163,13 @@ public class GridSnap : MonoBehaviour
 			base.OnInspectorGUI();
 			if(GUILayout.Button("Snap To Grid"))
 			{
-				rTarget.transform.position -= rTarget.cellOffset / 2;
+				if (rTarget._gridSubdivistions > 1)
+					rTarget.transform.position -= rTarget.cellOffset / 2;
 				rTarget.transform.position *= rTarget._gridSubdivistions;
 				rTarget.transform.position = rTarget.GetSnapPosition();
 				rTarget.transform.position /= rTarget._gridSubdivistions;
-				rTarget.transform.position += rTarget.cellOffset / 2;
+				if (rTarget._gridSubdivistions > 1)
+					rTarget.transform.position += rTarget.cellOffset / 2;
 
 				EditorUtility.SetDirty(rTarget);
 			}
