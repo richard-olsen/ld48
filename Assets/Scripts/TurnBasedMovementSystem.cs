@@ -76,8 +76,9 @@ public class TurnBasedMovementSystem : MonoBehaviour
 
         if (playerActionsLeft > 0 || enemies.Count == 0)
         {
-            if (player.DoActions())
-                playerActionsLeft--;
+            int actions = player.DoActions(playerActionsLeft);
+            
+            playerActionsLeft -= actions;
 
             if (playerActionsLeft <= 0)
                 aiTimer = 0;
@@ -89,7 +90,7 @@ public class TurnBasedMovementSystem : MonoBehaviour
         {
             EnemyEntry entry = enemies[i];
 
-            if (entry.actionsLeft == 0)
+            if (entry.actionsLeft <= 0)
             {
                 continue;
             }
@@ -99,11 +100,9 @@ public class TurnBasedMovementSystem : MonoBehaviour
 
             aiTimer = 0;
 
-            if (entry.enemy.DoActions())
-            {
-                entry.actionsLeft = entry.actionsLeft - 1;
-            }
+            int actions = entry.enemy.DoActions(entry.actionsLeft);
 
+            entry.actionsLeft = entry.actionsLeft - actions;
 
             return;
         }

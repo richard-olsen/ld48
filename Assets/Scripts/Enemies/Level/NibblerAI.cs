@@ -19,46 +19,45 @@ public class NibblerAI : GridEnemyBase
 
     public bool followingPlayer = false;
 
+    public int oxygenDepletion = 2;
+
     private bool MadeItToTarget()
     {
-        return positionX == targetPositions[nextPatrolPoint].x && positionY == targetPositions[nextPatrolPoint].y;
+        return position == targetPositions[nextPatrolPoint];
     }
 
-    public override bool DoActions()
+    public override int DoActions(int actionsLeft)
     {
-        Vector2Int currentPos = new Vector2Int(positionX, positionY);
         bool firstFollowIteration = false;
 
-        float distanceFromPlayer = (playerPos - currentPos).magnitude;
-
-        if (distanceFromPlayer < 4.0f && !followingPlayer)
+        if (PlayerDistance < 4.0f && !followingPlayer)
         {
             followingPlayer = true;
             firstFollowIteration = true;
-            lastLocationOnPatrol.x = positionX;
-            lastLocationOnPatrol.y = positionY;
+            lastLocationOnPatrol = position;
         }
 
         if (followingPlayer)
         {
-            if (distanceFromPlayer >= 4.0f)
+            if (PlayerDistance >= 4.0f)
             {
                 path.Clear();
                 followingPlayer = false;
-                return false;
+                return 0;
             }
 
             if (lastPlayerPos != playerPos || firstFollowIteration)
             {
+                Debug.Log("Pathfinding player...");
                 lastPlayerPos = playerPos;
 
-                path = pathfinder.FindPath(positionX, positionY, playerPos.x, playerPos.y);
+                path = pathfinder.FindPath(position.x, position.y, playerPos.x, playerPos.y);
 
 #if UNITY_EDITOR
                 if (path == null)
                 {
                     Debug.LogError("Player is in unreachable position!!!!");
-                    return false;
+                    return 0;
                 }
 #endif
 
@@ -68,14 +67,14 @@ public class NibblerAI : GridEnemyBase
 
             if (path.Count == 0)
             {
-                // TODO Attack Player
-                return true;
+                player.DepleteOxygen(oxygenDepletion);
+                return 1;
             }
         }
         else
         {
             if (targetPositions.Length == 0)
-                return false;
+                return 0;
 
             if (MadeItToTarget())
             {
@@ -87,11 +86,12 @@ public class NibblerAI : GridEnemyBase
 
             if (lastPatrolPoint != nextPatrolPoint || path.Count == 0)
             {
+                Debug.Log("Pathfinding target...");
                 lastPatrolPoint = nextPatrolPoint;
 
                 Vector2Int nextPos = targetPositions[nextPatrolPoint];
 
-                path = pathfinder.FindPath(positionX, positionY, nextPos.x, nextPos.y);
+                path = pathfinder.FindPath(position.x, position.y, nextPos.x, nextPos.y);
 #if UNITY_EDITOR
                 if (path == null)
                 {
@@ -107,15 +107,15 @@ public class NibblerAI : GridEnemyBase
         {
             var node = path[0];
 
-            int x = node.x - positionX;
-            int y = node.y - positionY;
+            int x = node.x - position.x;
+            int y = node.y - position.y;
 
             path.RemoveAt(0);
 
-            MoveAlongGrid(node.x - positionX, node.y - positionY);
-            return true;
+            MoveAlongGrid(node.x - position.x, node.y - position.y);
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 }

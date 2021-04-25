@@ -19,6 +19,8 @@ public abstract class GridEnemyBase : GridAlignedEntity
 
     protected Animator animator;
 
+    protected float PlayerDistance => (position - playerPos).magnitude;
+
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
@@ -84,5 +86,5 @@ public abstract class GridEnemyBase : GridAlignedEntity
     }
 
     // Constantly called. Action decisions are made here
-    public abstract bool DoActions();
+    public abstract int DoActions(int actionsLeft);
 }
