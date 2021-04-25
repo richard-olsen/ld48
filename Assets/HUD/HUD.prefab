@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5846550349658706183}
   - component: {fileID: 5846550349658706182}
   - component: {fileID: 2474275753907533508}
+  - component: {fileID: 1569912901941324300}
+  - component: {fileID: 408109135545483500}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -117,6 +119,40 @@ MonoBehaviour:
   _player: {fileID: 0}
   _oxyMeterController: {fileID: 7978096461728946871}
   _actionButtonContainer: {fileID: 277035834679749773}
+--- !u!114 &1569912901941324300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5846550349658706181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!114 &408109135545483500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5846550349658706181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
 --- !u!1001 &8127685538702416720
 PrefabInstance:
   m_ObjectHideFlags: 0

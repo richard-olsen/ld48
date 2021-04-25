@@ -34,6 +34,45 @@ public class LevelTransition : MonoBehaviour
 		}
 	}
 
+	private Camera _cam;
+	protected Camera cam => _cam ?? (_cam = FindObjectOfType<Camera>());
+
+	private Coroutine _camLerpCoroutine = null;
+
+	private static readonly float cameraPanSpeed = 20;
+
+	private void FocusCamera()
+	{
+		// only start the coroutine if it has not been started yet
+		if (_camLerpCoroutine == null)
+		{
+			// define the camera lerp coroutine
+			IEnumerator _doCamLerp()
+			{
+				// inch camera closer while it isn't close enough to the target
+				while (
+					Vector2.Distance(cam.transform.position, _camFocusPoint.position) >
+					Time.deltaTime * cameraPanSpeed)
+				{
+					Vector2 camDelta = ((Vector2)_camFocusPoint.position - (Vector2)cam.transform.position).normalized * Time.deltaTime * cameraPanSpeed;
+					cam.transform.position += new Vector3(camDelta.x, camDelta.y, 0);
+					yield return null;
+				}
+
+				// snap the camera position to the target
+				cam.transform.position = _camFocusPoint.position + Vector3.back * 10;
+
+				// break the corouting and set it to null to flag that it's not happening any more
+				_camLerpCoroutine = null;
+				targetTransition._parentLevel.gameObject.SetActive(false);
+				yield break;
+			};
+
+			// start the camera lerp async coroutine
+			_camLerpCoroutine = StartCoroutine(_doCamLerp());
+		}
+	}
+
 	public void DoTransition()
 	{
 		// do not hit the trigger more than once
@@ -42,7 +81,8 @@ public class LevelTransition : MonoBehaviour
 
 		// get the target transition of the prefab
 		LevelTransition target = targetTransition;
-		Vector3 offset = target.transform.position - _targetLevelPrefab.transform.position;
+		LevelAssetController trgLev = _targetLevelInstance ?? _targetLevelPrefab;
+		Vector3 offset = target.transform.position - trgLev.transform.position;
 
 		// create the level instance if it has not been instantiated yet
 		if (_targetLevelInstance == null)
@@ -61,6 +101,8 @@ public class LevelTransition : MonoBehaviour
 		// set flag so that transition only happens once
 		target._isTransitioning = true;
 		_isTransitioning = true;
+
+		target.FocusCamera();
 	}
 
 	#region Unity Messages
@@ -79,6 +121,14 @@ public class LevelTransition : MonoBehaviour
 		}
 	}
 #endif
+
+	private void OnDisable()
+	{
+		if (_camLerpCoroutine != null)
+		{
+			StopCoroutine(_camLerpCoroutine);
+		}
+	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
