@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class GridAlignedEntity : MonoBehaviour
 {
-    protected int positionX;
-    protected int positionY;
+    protected Vector2Int position;
     protected Vector3 targetPosition;
     private Vector3 oldPosition;
 
@@ -36,27 +35,27 @@ public class GridAlignedEntity : MonoBehaviour
 
     public void MoveAlongX(int xOffset)
     {
-        positionX += xOffset;
+        position.x += xOffset;
 
-        targetPosition.x = (float)positionX + 0.5f;
+        targetPosition.x = (float)position.x + 0.5f;
 
         interpolateTime = 0;
     }
 
     public void MoveAlongY(int yOffset)
     {
-        positionY += yOffset;
+        position.y += yOffset;
 
-        targetPosition.y = (float)positionY + 0.5f;
+        targetPosition.y = (float)position.y + 0.5f;
 
         interpolateTime = 0;
     }
 
     public void SetAlongX(int x)
     {
-        positionX = x;
+        position.x = x;
 
-        targetPosition.x = (float)positionX + 0.5f;
+        targetPosition.x = (float)position.x + 0.5f;
 
         oldPosition = targetPosition;
         transform.position = targetPosition;
@@ -66,9 +65,9 @@ public class GridAlignedEntity : MonoBehaviour
 
     public void SetAlongY(int y)
     {
-        positionY = y;
+        position.y = y;
 
-        targetPosition.y = (float)positionY + 0.5f;
+        targetPosition.y = (float)position.y + 0.5f;
 
         oldPosition = targetPosition;
         transform.position = targetPosition;
@@ -105,10 +104,10 @@ public class GridAlignedEntity : MonoBehaviour
 
     public int GetX()
     {
-        return positionX;
+        return position.x;
     }
     public int GetY()
     {
-        return positionY;
+        return position.y;
     }
 }

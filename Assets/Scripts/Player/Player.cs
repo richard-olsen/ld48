@@ -25,7 +25,7 @@ public class Player : GridAlignedEntity
         UpdatePositions();
     }
 
-    public bool DoActions()
+    public int DoActions(int actionsLeft)
     {
         if (!usingMenus)
         {
@@ -47,11 +47,11 @@ public class Player : GridAlignedEntity
 
             if (MoveAlongGrid(moveX, moveY))
             {
-                return true;
+                return 1;
             }
         }
 
-        return false;
+        return 0;
     }
 
     // Update is called once per frame
