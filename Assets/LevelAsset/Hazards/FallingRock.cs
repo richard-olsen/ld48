@@ -14,7 +14,7 @@ public class FallingRock : MonoBehaviour, IInteractible
 	private bool _isFalling = false;
 	public bool IsFalling => _isFalling;
 
-	public void InteractWith(IInteractor interacto)
+	public void InteractWith(IInteractor interactor)
 	{
 		// TODO
 	}
