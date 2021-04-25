@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1451421876591639116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2089829560243154313}
+  m_Layer: 0
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2089829560243154313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451421876591639116}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2018248280748218228}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &631060173505478391
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1327,7 +1357,7 @@ PrefabInstance:
     - target: {fileID: 2160583859679758081, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
       propertyPath: _camFocusPoint
       value: 
-      objectReference: {fileID: 2018248280748218228}
+      objectReference: {fileID: 2089829560243154313}
     - target: {fileID: 2160583859679758081, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
       propertyPath: _targetLevelPrefab
       value: 
@@ -1389,10 +1419,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Transition_Bottom
       objectReference: {fileID: 0}
+    - target: {fileID: 1765588076475734882, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2160583859679758081, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
       propertyPath: _parentLevel
       value: 
       objectReference: {fileID: 2018248280748218227}
+    - target: {fileID: 2160583859679758081, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
+      propertyPath: _camFocusPoint
+      value: 
+      objectReference: {fileID: 2089829560243154313}
+    - target: {fileID: 2160583859679758081, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
+      propertyPath: _targetLevelPrefab
+      value: 
+      objectReference: {fileID: 2018248280748218227, guid: 50cfa95638319d24ca912ad9c566f784, type: 3}
     - target: {fileID: 3183140303585660714, guid: 18ee736815923fc4397fc8de47fad842, type: 3}
       propertyPath: m_RootOrder
       value: 2
