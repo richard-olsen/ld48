@@ -56,7 +56,6 @@ public class Pathfinding
 
         for (int j = 0; j < sizeY; j++)
         {
-            string test = "[";
             for (int i = 0; i < sizeX; i++)
             {
                 int x = i + xOffset;
@@ -69,10 +68,7 @@ public class Pathfinding
                 node.x = x;
                 node.y = y;
                 node.isEmpty = tiles.GetTile(new Vector3Int(x, y, 0)) == null;
-                test += node.isEmpty ? "*" : "0";
             }
-            test += "]";
-            Debug.Log(test);
         }
     }
 
