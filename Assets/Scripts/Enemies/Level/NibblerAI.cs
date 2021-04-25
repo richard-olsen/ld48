@@ -12,14 +12,15 @@ using UnityEngine.Tilemaps;
 public class NibblerAI : GridEnemyBase
 {
     public Vector2Int[] targetPositions;
-    public Vector2Int lastLocationOnPatrol; // This keeps track of the fish's last location before following the player
+    private Vector2Int lastLocationOnPatrol; // This keeps track of the fish's last location before following the player
 
-    public int nextPatrolPoint = 0;
-    public int lastPatrolPoint = -1;
+    private int nextPatrolPoint = 0;
+    private int lastPatrolPoint = -1;
 
-    public bool followingPlayer = false;
+    private bool followingPlayer = false;
 
-    public int oxygenDepletion = 2;
+    [SerializeField]
+    private float damageToDeal = 6.0f;
 
     private bool MadeItToTarget()
     {
@@ -67,7 +68,7 @@ public class NibblerAI : GridEnemyBase
 
             if (path.Count == 0)
             {
-                player.DepleteOxygen(oxygenDepletion);
+                player.DepleteOxygen(damageToDeal);
                 return 1;
             }
         }
