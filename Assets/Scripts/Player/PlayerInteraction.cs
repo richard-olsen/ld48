@@ -11,7 +11,7 @@ public enum PlayerInteractMode
 }
 
 [RequireComponent(typeof(Player))]
-public class PlayerInteraction : MonoBehaviour
+public class PlayerInteraction : MonoBehaviour, IInteractor
 {
 	private LevelAssetController _currentLevel;
 	public LevelAssetController CurrentLevel
