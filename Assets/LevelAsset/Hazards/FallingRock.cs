@@ -30,7 +30,16 @@ public class FallingRock : MonoBehaviour, IInteractible
 
 	private void fallCheck()
 	{
-		if (!tilemap.HasTile(cellPosition + Vector3Int.down))
+		bool canFall = true;
+		foreach(Collider2D col in _gridsnap.CollisionsAtOffset(Vector3Int.down))
+		{
+			if (col.isTrigger)
+				continue;
+			if (col.GetComponent<IDamageable>() != null)
+				continue;
+			canFall = false;
+		}
+		if (canFall)
 		{
 			_gridsnap.MoveCells(Vector3Int.down, _fallTickLength);
 			_isFalling = true;

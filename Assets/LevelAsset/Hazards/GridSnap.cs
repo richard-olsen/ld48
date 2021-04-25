@@ -51,6 +51,21 @@ public class GridSnap : MonoBehaviour
 		return dist;
 	}
 
+	/// <summary>
+	/// returns an array of colliders that are in the target cell, which is the cell that is offset from this 
+	/// object's cell. For example, an offset of Vector3(0, 1, 0) would return all the colliders of the objects
+	/// in the cell directly below this object.
+	/// </summary>
+	/// <param name="offset">the cell offset from the cell that this object exists in</param>
+	public Collider2D[] CollisionsAtOffset(Vector3Int offset)
+	{
+		Vector3Int targetCell = GetCellPosition() + offset;
+		Vector2 targetPos = grid.CellToWorld(targetCell) + cellOffset;
+		Collider2D[] cols = Physics2D.OverlapBoxAll(targetPos, new Vector2(0.9f, 0.9f), 0);
+
+		return cols;
+	}
+
 	public void CheckForSnap()
 	{
 		if(_snapCoroutine != null)
@@ -74,7 +89,6 @@ public class GridSnap : MonoBehaviour
 
 	public void SnapToCell(Vector3Int cell, float time)
 	{
-
 		// if the coroutine is running, stop it
 		if(_snapCoroutine != null)
 		{
@@ -137,6 +151,7 @@ public class GridSnap : MonoBehaviour
 			if(GUILayout.Button("Snap To Grid"))
 			{
 				rTarget.transform.position = rTarget.GetSnapPosition();
+				EditorUtility.SetDirty(rTarget);
 			}
 		}
 	}
