@@ -57,7 +57,7 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 		_currentInteractible = null;
 	}
 
-	public void InteractWithWorld()
+	public void StartSelectWorld()
 	{
 		_interactMode = PlayerInteractMode.SelectWorld;
 		PlayerComponent.usingMenus = true;
@@ -77,14 +77,30 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 
 	public void SelectPlayerAction(PlayerAction action)
 	{
-		_currentAction = action;
-		switch (action.ActionType)
-		{
-			case PlayerActionType.Interact:
-				InteractWithWorld();
-				actionButtons.Close();
-				break;
+		// this needs to be done in the next frame otherwise the interaction input "double clicks"
+		// and sometimes causes the player to not be able to do any action
+
+		// do inside a coroutine
+		IEnumerator doNextFrame(){
+
+			// wait for some time
+			yield return new WaitForSecondsRealtime(0.1f);
+
+			_currentAction = action;
+			switch (action.ActionType)
+			{
+				case PlayerActionType.Interact:
+					StartSelectWorld();
+					actionButtons.Close();
+					break;
+			}
+
+			// stop coroutine
+			yield break;
 		}
+
+		// start the coroutine so that this action does not occur until next frame
+		StartCoroutine(doNextFrame());
 	}
 
 	private void selectWorld(Vector3Int cellPos)
@@ -94,6 +110,7 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 			// find any interactible objects at the cell that the player selected
 			Vector3 selectPos = CurrentLevel.Tilemap.layoutGrid.CellToWorld(cellPos) + CurrentLevel.Tilemap.layoutGrid.cellSize * 0.5f;
 			Collider2D[] colliders = Physics2D.OverlapBoxAll(selectPos, new Vector2(0.9f, 0.9f), 0);
+			bool interacted = false;
 			for (int i = colliders.Length - 1; i >= 0; i--)
 			{
 				Collider2D collider = colliders[i];
@@ -102,9 +119,13 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 				{
 					// interact with the interactible object that was found
 					interactible.InteractWith(this);
+					interacted = true;
 					break;
 				}
 			}
+
+			if (!interacted)
+				EndInteractCycle();
 		}
 	}
 
