@@ -14,14 +14,6 @@ public class EnemyChase : GridEnemyBase
 		throw new System.NotImplementedException("EnemyChase.Kill() not implemented");
 	}
 
-	// Start is called before the first frame update
-	void Start()
-    {
-        SnapToGrid();
-
-        pathfinder = new Pathfinding(map);
-    }
-
     public override int DoActions(int actionsLeft)
     {
         int playerX = player.GetX();
