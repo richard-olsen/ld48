@@ -12,28 +12,17 @@ using UnityEngine.Tilemaps;
 public class NibblerAI : GridEnemyBase
 {
     public Vector2Int[] targetPositions;
-    public Tilemap tiles;
+    public Vector2Int lastLocationOnPatrol; // This keeps track of the fish's last location before following the player
 
     public int nextPatrolPoint = 0;
     public int lastPatrolPoint = -1;
 
-    public Vector2Int lastLocationOnPatrol; // This keeps track of the fish's last location before following the player
-
     public bool followingPlayer = false;
-
-    public Player player;
-
-    public Vector2Int playerPos;
-    public Vector2Int lastPlayerPos;
-
-    private List<Pathfinding.PathNode> path;
-    private Pathfinding pathfinder;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        pathfinder = new Pathfinding(tiles);
     }
 
     private bool MadeItToTarget()

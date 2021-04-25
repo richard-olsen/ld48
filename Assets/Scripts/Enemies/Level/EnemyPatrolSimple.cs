@@ -13,17 +13,6 @@ public class EnemyPatrolSimple : GridEnemyBase
     private float decideTime = 0;
     private bool canMove = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        SnapToGrid();
-    }
-
-    private void FixedUpdate()
-    {
-        UpdatePositions();
-    }
-
     public override bool DoActions()
     {
         if (positionX <= Mathf.Min(positionX1, positionX2))

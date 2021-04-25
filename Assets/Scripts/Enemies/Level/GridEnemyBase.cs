@@ -1,10 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(Animator))]
 public abstract class GridEnemyBase : GridAlignedEntity
 {
+    public Player player;
+    public Tilemap map;
+
+    protected Pathfinding pathfinder;
+    protected List<Pathfinding.PathNode> path;
+
+    protected Vector2Int playerPos;
+    protected Vector2Int lastPlayerPos;
+
     protected Animator animator;
 
     // Start is called before the first frame update
@@ -12,6 +22,7 @@ public abstract class GridEnemyBase : GridAlignedEntity
     {
         SnapToGrid();
         animator = GetComponent<Animator>();
+        pathfinder = new Pathfinding(map);
     }
 
     private void FixedUpdate()
