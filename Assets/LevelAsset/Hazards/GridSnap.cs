@@ -12,6 +12,12 @@ public class GridSnap : MonoBehaviour
 	private LevelAssetController _parentLevel;
 	public LevelAssetController ParentLevel => _parentLevel ?? (_parentLevel = transform.GetComponentInParent<LevelAssetController>());
 
+	[SerializeField]
+	private bool _removeOnStart = false;
+
+	[SerializeField]
+	private int _gridSubdivistions = 1;
+
 	public bool autoSnap = true;
 	public bool slerp = false;
 	public float autoSnapTime = 0.1f;
@@ -134,11 +140,18 @@ public class GridSnap : MonoBehaviour
 		SnapToCell(currentCell + movement, time);
 	}
 
+	private void Start()
+	{
+		if (_removeOnStart)
+			Destroy(this);
+	}
+
 	private void Update()
 	{
 		if (autoSnap)
 			CheckForSnap();
 	}
+
 #if UNITY_EDITOR
 	[CustomEditor(typeof(GridSnap))]
 	private class GridSnapEditor : Editor
@@ -150,7 +163,12 @@ public class GridSnap : MonoBehaviour
 			base.OnInspectorGUI();
 			if(GUILayout.Button("Snap To Grid"))
 			{
+				rTarget.transform.position -= rTarget.cellOffset / 2;
+				rTarget.transform.position *= rTarget._gridSubdivistions;
 				rTarget.transform.position = rTarget.GetSnapPosition();
+				rTarget.transform.position /= rTarget._gridSubdivistions;
+				rTarget.transform.position += rTarget.cellOffset / 2;
+
 				EditorUtility.SetDirty(rTarget);
 			}
 		}
