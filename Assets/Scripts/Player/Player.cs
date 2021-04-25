@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : GridAlignedEntity, IDamageable
 {
@@ -39,6 +40,9 @@ public class Player : GridAlignedEntity, IDamageable
 
     public int DoActions(int actionsLeft)
     {
+        if (oxygenLevel <= 0)
+            return 0;
+
         if (!usingMenus)
         {
             float hor = Input.GetAxis("Horizontal");
@@ -115,8 +119,12 @@ public class Player : GridAlignedEntity, IDamageable
 
     public void Kill()
 	{
-        // TODO
-        throw new System.NotImplementedException("Player.Kill() is not implemented");
+        IEnumerator gameOverScreen()
+        {
+            yield return new WaitForSeconds(1.5f);
+            SceneManager.LoadScene("Scenes/GameOver");
+        }
+        StartCoroutine(gameOverScreen());
 	}
 
     public void GiveOxygen(float oxygen)
