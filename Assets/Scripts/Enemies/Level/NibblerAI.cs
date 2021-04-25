@@ -30,16 +30,10 @@ public class NibblerAI : GridEnemyBase
     private Pathfinding pathfinder;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         pathfinder = new Pathfinding(tiles);
-        SnapToGrid();
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        UpdatePositions();
     }
 
     private bool MadeItToTarget()

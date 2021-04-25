@@ -22,12 +22,6 @@ public class EnemyChase : GridEnemyBase
         pathfinder = new Pathfinding(map);
     }
 
-    // Update is called once per frame
-    private void FixedUpdate()
-    {
-        UpdatePositions();
-    }
-
     public override bool DoActions()
     {
         int playerX = player.GetX();

@@ -15,12 +15,12 @@ public class Player : GridAlignedEntity
     public bool usingMenus;
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         SnapToGrid();
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         UpdatePositions();
     }

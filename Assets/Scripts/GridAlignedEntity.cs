@@ -11,10 +11,6 @@ public class GridAlignedEntity : MonoBehaviour
 
     protected float interpolateTime = 1.0f;
 
-    protected void Awake()
-    {
-    }
-
     protected void UpdatePositions()
     {
         if (interpolateTime >= 1.0f)
