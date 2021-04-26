@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+[RequireComponent(typeof(Hazard))]
 public class FallingRock : MonoBehaviour, IInteractible
 {
 	private LevelAssetController _parentLevel;
@@ -13,6 +14,9 @@ public class FallingRock : MonoBehaviour, IInteractible
 
 	protected Tile _tile;
 	protected Tile tile => _tile ?? (_tile = ScriptableObject.CreateInstance<Tile>());
+
+	private Hazard _hazard;
+	public Hazard HazardComponent => _hazard ?? (_hazard = GetComponent<Hazard>());
 
 	private bool _isFalling = false;
 	public bool IsFalling => _isFalling;
@@ -46,12 +50,14 @@ public class FallingRock : MonoBehaviour, IInteractible
 		{
 			_gridsnap.MoveCells(Vector3Int.down, _fallTickLength);
 			_isFalling = true;
+			HazardComponent.DisableWhenOutOfLevel = true;
 			tilemap.SetTile(_gridsnap.GetCellPosition(), null);
 		}
 		else
 		{
 			_isFalling = false;
-			if(!tilemap.HasTile(_gridsnap.GetCellPosition()))
+			HazardComponent.DisableWhenOutOfLevel = false;
+			if (!tilemap.HasTile(_gridsnap.GetCellPosition()))
 				tilemap.SetTile(_gridsnap.GetCellPosition(), tile);
 		}
 	}

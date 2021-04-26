@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Hazard))]
 public class AirBubble : MonoBehaviour, IDamageable, IInteractible
 {
 	[SerializeField]
@@ -9,6 +10,9 @@ public class AirBubble : MonoBehaviour, IDamageable, IInteractible
 
 	[SerializeField]
 	private float _oxygenAmount = 12.5f;
+
+	private Hazard _hazard;
+	public Hazard HazardComponent => _hazard ?? (_hazard = GetComponent<Hazard>());
 
 	private GridSnap _gridSnap;
 	public GridSnap gridSnap => _gridSnap ?? (_gridSnap = GetComponent<GridSnap>());
@@ -58,8 +62,15 @@ public class AirBubble : MonoBehaviour, IDamageable, IInteractible
 			}
 
 			// float upward
-			if(canMoveUp)
+			if (canMoveUp)
+			{
 				gridSnap.MoveCells(Vector3Int.up);
+				HazardComponent.DisableWhenOutOfLevel = true;
+			}
+			else
+			{
+				HazardComponent.DisableWhenOutOfLevel = false;
+			}
 		}
 	}
 
