@@ -124,7 +124,7 @@ public class Player : GridAlignedEntity, IDamageable
         else
             DepleteOxygen(damage);
 
-        Instantiate(_hitPrefab, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+        Instantiate(_hitPrefab, transform.position + Vector3.back, Quaternion.Euler(0, 0, Random.Range(0, 360)));
 
         // kill if health/oxygen goes to or below 0
         if (!IsAlive)

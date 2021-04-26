@@ -11,7 +11,8 @@ public class DestroyAfterParticles : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Particles.particleCount <= 0)
-            Destroy(gameObject);
+        if (Particles.time > 0.1f)
+            if (Particles.particleCount <= 0)
+                Destroy(gameObject);
     }
 }

@@ -57,7 +57,7 @@ public abstract class GridEnemyBase : GridAlignedEntity, IDamageable
     /// <param name="damage">the amount of damage that the enemy should take</param>
     public virtual void Damage(float damage)
     {
-        Instantiate(_hitPrefab, transform.position + Vector3.back, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+        var m = Instantiate(_hitPrefab, transform.position + Vector3.back, Quaternion.Euler(0, 0, Random.Range(0, 360)));
 
         _health -= damage;
 		if (!IsAlive)
