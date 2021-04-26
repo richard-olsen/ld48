@@ -24,6 +24,9 @@ public class Player : GridAlignedEntity, IDamageable
     private float _meleeDamage = 5;
     public float MeleeDamage => _meleeDamage;
 
+    private Vector2Int _prevMove;
+    public Vector2Int PreviousMoveDirection => _prevMove;
+
     [SerializeField]
     private Animator playerAnimator;
 
@@ -69,6 +72,7 @@ public class Player : GridAlignedEntity, IDamageable
 
             if (MoveAlongGrid(moveX, moveY))
             {
+                _prevMove = new Vector2Int(moveX, moveY);
                 DepleteOxygen(movementOxygenCost);
                 return 1;
             }

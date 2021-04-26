@@ -41,7 +41,7 @@ public class LevelTransition : MonoBehaviour
 
 	private static readonly float cameraPanSpeed = 20;
 
-	private void FocusCamera()
+	private void FocusCamera(Player plr)
 	{
 		// only start the coroutine if it has not been started yet
 		if (_camLerpCoroutine == null)
@@ -65,6 +65,7 @@ public class LevelTransition : MonoBehaviour
 				// break the corouting and set it to null to flag that it's not happening any more
 				_camLerpCoroutine = null;
 				targetTransition._parentLevel.gameObject.SetActive(false);
+				plr.usingMenus = false;
 				yield break;
 			};
 
@@ -112,7 +113,8 @@ public class LevelTransition : MonoBehaviour
 		target._isTransitioning = true;
 		_isTransitioning = true;
 
-		target.FocusCamera();
+		plr.usingMenus = true;
+		target.FocusCamera(plr);
 	}
 
 	#region Unity Messages
@@ -147,6 +149,16 @@ public class LevelTransition : MonoBehaviour
 		if (plr != null)
 		{
 			DoTransition(plr);
+		}
+	}
+
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+
+		Player plr = collision.gameObject.GetComponent<Player>();
+		if (plr != null)
+		{
+			plr.MoveAlongGrid(plr.PreviousMoveDirection.x, plr.PreviousMoveDirection.y);
 		}
 	}
 
