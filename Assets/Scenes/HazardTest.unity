@@ -472,7 +472,7 @@ PrefabInstance:
     - target: {fileID: 2018248280676925228, guid: f0a3939e9385a8a46826eec659301d22, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[7].m_Data
       value: 
-      objectReference: {fileID: 1741364125068972350, guid: 5f0c7de2898303542bf89094d1adacd7, type: 3}
+      objectReference: {fileID: -4590260581976899338, guid: 5f0c7de2898303542bf89094d1adacd7, type: 3}
     - target: {fileID: 2018248280676925228, guid: f0a3939e9385a8a46826eec659301d22, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[15].m_Data
       value: 
@@ -486,8 +486,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2018248280676925228, guid: f0a3939e9385a8a46826eec659301d22, type: 3}
+      propertyPath: m_TileSpriteArray.Array.data[10].m_RefCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2018248280676925228, guid: f0a3939e9385a8a46826eec659301d22, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[15].m_RefCount
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2018248280676925228, guid: f0a3939e9385a8a46826eec659301d22, type: 3}
       propertyPath: m_Tiles.Array.data[3].second.m_TileSpriteIndex
@@ -498,12 +502,16 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2018248280676925228, guid: f0a3939e9385a8a46826eec659301d22, type: 3}
+      propertyPath: m_Tiles.Array.data[23].second.m_TileSpriteIndex
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2018248280676925228, guid: f0a3939e9385a8a46826eec659301d22, type: 3}
       propertyPath: m_Tiles.Array.data[52].second.m_TileSpriteIndex
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2018248280676925228, guid: f0a3939e9385a8a46826eec659301d22, type: 3}
       propertyPath: m_Tiles.Array.data[67].second.m_TileSpriteIndex
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2018248280676925228, guid: f0a3939e9385a8a46826eec659301d22, type: 3}
       propertyPath: m_Tiles.Array.data[75].second.m_TileSpriteIndex
