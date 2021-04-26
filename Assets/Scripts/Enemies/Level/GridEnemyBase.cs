@@ -21,11 +21,12 @@ public abstract class GridEnemyBase : GridAlignedEntity, IDamageable
     protected List<Pathfinding.PathNode> path;
 
     protected Vector2Int playerPos;
+    protected Vector2Int playerPosAI => position - turnBased.LevelTileOffset;
     protected Vector2Int lastPlayerPos;
 
     protected Animator animator;
 
-    private TurnBasedMovementSystem turnBased;
+    protected TurnBasedMovementSystem turnBased;
 
     // can only be damaged while _canBeDamaged is true
     protected bool _canBeDamaged = true;

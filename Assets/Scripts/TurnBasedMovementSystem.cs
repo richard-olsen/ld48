@@ -6,6 +6,7 @@ using UnityEngine.Assertions;
 public class TurnBasedMovementSystem : MonoBehaviour
 {
     private Player player;
+    private PlayerInteraction playerInteraction;
 
     [SerializeField]
     private int playerAllowedMoves = 3;
@@ -37,6 +38,8 @@ public class TurnBasedMovementSystem : MonoBehaviour
 
     private float aiTimer = 0;
     private static float aiWait = 0.1f;
+
+    public Vector2Int LevelTileOffset => playerInteraction.CurrentLevel.LevelTileOffset;
 
     public void AddEnemy(GridEnemyBase enemy)
     {
@@ -93,6 +96,9 @@ public class TurnBasedMovementSystem : MonoBehaviour
 
         player = playerObject.GetComponent<Player>();
         Assert.IsNotNull(player, "Player GameObject REQUIRES the Player class! Are you using the prefab?");
+
+        playerInteraction = playerObject.GetComponent<PlayerInteraction>();
+        Assert.IsNotNull(playerInteraction, "Player GameObject REQUIRES the Player Interaction class! Are you using the prefab?");
 
         ResetMoves();
     }
