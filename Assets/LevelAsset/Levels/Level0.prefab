@@ -6719,7 +6719,7 @@ PrefabInstance:
     - target: {fileID: 9214084260501838276, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
       propertyPath: _message
       value: "To move, use the <color=#FE7842>arrow keys</color>, and keep an eye
-        on the <color=#FFD700>turn counter</color> to the bottom left of the Screen.
+        on the <color=#FFD700>turn counter</color> to the bottom right of the Screen.
         \nPress <color=#FE7842>Space</color> to Continue."
       objectReference: {fileID: 0}
     - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}

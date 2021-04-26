@@ -75,10 +75,23 @@ public class FallingRock : MonoBehaviour, IInteractible
 		if (IsFalling)
 		{
 			IDamageable dam = collision.gameObject.GetComponent<IDamageable>();
-			if(dam != null && dam.CanBeDamaged)
+			if (dam != null && dam.CanBeDamaged)
 			{
 				Debug.Log("Falling rock hits " + dam + "for 10 dmg");
 				dam.Damage(10);
+			}
+		}
+	}
+
+	private void OnCollisionStay2D(Collision2D collision)
+	{
+		if (IsFalling)
+		{
+			AirBubble bub = collision.gameObject.GetComponent<AirBubble>();
+			if (bub != null && bub.CanBeDamaged)
+			{
+				Debug.Log("Falling rock hits " + bub + "for 10 dmg");
+				bub.Kill();
 			}
 		}
 	}
