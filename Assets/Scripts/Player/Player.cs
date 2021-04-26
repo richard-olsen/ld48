@@ -63,7 +63,7 @@ public class Player : GridAlignedEntity, IDamageable
 
             if (MoveAlongGrid(moveX, moveY))
             {
-                DepleteOxygen(movementOxygenCost);
+                Damage(movementOxygenCost);
                 return 1;
             }
         }
