@@ -168,6 +168,9 @@ public class Player : GridAlignedEntity, IDamageable
 
         if (oxygenLevel < 0)
             oxygenLevel = 0;
+
+        if (!IsAlive)
+            Kill();
     }
 
     public float GetOxygenLevel()
