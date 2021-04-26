@@ -187,6 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c32de9c865eed4fa62a4e860b5a6bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _removeOnStart: 0
+  _gridSubdivistions: 1
   autoSnap: 1
   slerp: 0
   autoSnapTime: 0.1
@@ -203,5 +205,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca3fbdb12483bd149a1d20c056ffa3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _floatUpward: 0
+  _floatUpward: 1
   _oxygenAmount: 12.5
