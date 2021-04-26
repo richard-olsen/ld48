@@ -63,4 +63,17 @@ public class FallingRock : MonoBehaviour, IInteractible
 			fallCheck();
 		}
 	}
+
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (IsFalling)
+		{
+			IDamageable dam = collision.gameObject.GetComponent<IDamageable>();
+			if(dam != null && dam.CanBeDamaged)
+			{
+				Debug.Log("Falling rock hits " + dam + "for 10 dmg");
+				dam.Damage(10);
+			}
+		}
+	}
 }
