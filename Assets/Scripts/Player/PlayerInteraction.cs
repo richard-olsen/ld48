@@ -162,12 +162,16 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 					// interact with the interactible object that was found
 					interactible.InteractWith(this);
 					interacted = true;
+					HUDController.Noise_SubmitValid();
 					break;
 				}
 			}
 
 			if (!interacted)
+			{
+				HUDController.Noise_SubmitInvalid();
 				EndInteractCycle();
+			}
 		}
 
 		else if (CurrentAction.ActionType == PlayerActionType.Attack_Melee)
@@ -186,12 +190,14 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 					db.Damage(PlayerComponent.MeleeDamage);
 					db.KnockBack(GetKnockBackDirAt((Vector2Int)cellPos));
 					hitEnemy = true;
+					HUDController.Noise_SubmitValid();
 					break;
 				}
 			}
 
 			// if no enemy was hit, we end the interaction cycle
-			//if (!hitEnemy)
+			if (!hitEnemy)
+				HUDController.Noise_SubmitInvalid();
 			EndInteractCycle();
 		}
 	}
@@ -294,6 +300,7 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 					return;
 
 				WorldCursor.SnapToCell(targetCell, 0.15f);
+				HUDController.Noise_Select();
 			}
 		}
 
@@ -327,6 +334,7 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 			// called when interaction was successful
 			void finishInteract()
 			{
+				HUDController.Noise_SubmitValid();
 
 				IEnumerator finishAfterWait()
 				{
@@ -349,6 +357,8 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 				}
 				else finishInteract();
 			}
+			else
+				HUDController.Noise_SubmitInvalid();
 		}
 	}
 

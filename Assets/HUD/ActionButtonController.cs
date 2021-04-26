@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
@@ -63,6 +64,16 @@ public class ActionButtonController : MonoBehaviour
 		// attach the event listener to the button's on click event
 		Button button = GetComponent<Button>();
 		button.onClick.AddListener(new UnityEngine.Events.UnityAction(onclick));
+	}
+
+	public void Noise_OnSelect(BaseEventData data)
+	{
+		HUDController.Noise_Select();
+	}
+
+	public void Noise_OnSubmit(BaseEventData data)
+	{
+		HUDController.Noise_SubmitValid();
 	}
 
 	#region Unity Messages

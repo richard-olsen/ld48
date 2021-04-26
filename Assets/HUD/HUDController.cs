@@ -22,6 +22,11 @@ public class HUDController : MonoBehaviour
 	]
 	private Player _player;
 
+	private static HUDController _hud;
+	public static HUDController HUD => _hud;
+
+	private AudioSource _audio;
+
 	[SerializeField]
 	private EventSystem _eventSys;
 	public EventSystem EventSys => _eventSys;
@@ -41,9 +46,38 @@ public class HUDController : MonoBehaviour
 	private WorldToScreenCursor _worldScreenCursor;
 	public WorldToScreenCursor WorldScreenCursor => _worldScreenCursor;
 
+	[SerializeField, Space]
+	private AudioClip _select;
+	[SerializeField]
+	private AudioClip _submitValid;
+	[SerializeField]
+	private AudioClip _submitInvalid;
+
+	public static void Noise_Select() {
+		HUD._audio.clip = HUD._select;
+		HUD._audio.loop = false;
+		HUD._audio.Play();
+	}
+	
+	public static void Noise_SubmitValid()
+	{
+		HUD._audio.clip = HUD._submitValid;
+		HUD._audio.loop = false;
+		HUD._audio.Play();
+	}
+	
+	public static void Noise_SubmitInvalid()
+	{
+		HUD._audio.clip = HUD._submitInvalid;
+		HUD._audio.loop = false;
+		HUD._audio.Play();
+	}
+
 	#region Unity Messages
 
 	private void Start() {
+		_hud = this;
+		_audio = gameObject.AddComponent<AudioSource>();
 		Player.GetComponent<PlayerInteraction>().HUD = this;
 	}
 
