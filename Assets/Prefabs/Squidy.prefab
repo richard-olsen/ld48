@@ -234,6 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 0}
   _hitPrefab: {fileID: 6757417036536225156, guid: c872e0194af9dbc46a14800dca612e0b, type: 3}
+  _diePrefab: {fileID: 6757417036536225156, guid: 679ee5fdae6305540a341fa603d3e67c, type: 3}
   _maxHealth: 10
   circle: {fileID: 5657361822586629898}
   radius: 4

@@ -14,6 +14,9 @@ public abstract class GridEnemyBase : GridAlignedEntity, IDamageable
     [SerializeField]
     private GameObject _hitPrefab;
 
+    [SerializeField]
+    private GameObject _diePrefab;
+
     protected Pathfinding pathfinder;
     protected List<Pathfinding.PathNode> path;
 
@@ -57,7 +60,7 @@ public abstract class GridEnemyBase : GridAlignedEntity, IDamageable
     /// <param name="damage">the amount of damage that the enemy should take</param>
     public virtual void Damage(float damage)
     {
-        var m = Instantiate(_hitPrefab, transform.position + Vector3.back, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+        Instantiate(_hitPrefab, transform.position + Vector3.back, Quaternion.Euler(0, 0, Random.Range(0, 360)));
 
         _health -= damage;
 		if (!IsAlive)
@@ -71,6 +74,8 @@ public abstract class GridEnemyBase : GridAlignedEntity, IDamageable
     /// </summary>
     public virtual void Kill()
     {
+        Instantiate(_diePrefab, transform.position + Vector3.back, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+
         turnBased.RemoveEnemy(this, true);
         Destroy(gameObject);
     }
