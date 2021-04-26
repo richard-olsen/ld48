@@ -285,6 +285,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5846550349658706233}
     m_Modifications:
+    - target: {fileID: 1920320651306284813, guid: ddf271c18da26464c895a2ddd24e7033, type: 3}
+      propertyPath: _hud
+      value: 
+      objectReference: {fileID: 2474275753907533508}
     - target: {fileID: 5028781176385299672, guid: ddf271c18da26464c895a2ddd24e7033, type: 3}
       propertyPath: m_Name
       value: TurnInfo
@@ -698,11 +702,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3142292718405997249, guid: eaf068c34b81c7f468634d27fa4bc83c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 18.3
+      value: 18.299988
       objectReference: {fileID: 0}
     - target: {fileID: 3142292718405997249, guid: eaf068c34b81c7f468634d27fa4bc83c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 17.6
+      value: 17.599976
       objectReference: {fileID: 0}
     - target: {fileID: 3142292718405997249, guid: eaf068c34b81c7f468634d27fa4bc83c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
