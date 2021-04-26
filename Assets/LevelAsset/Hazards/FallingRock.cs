@@ -11,6 +11,9 @@ public class FallingRock : MonoBehaviour, IInteractible
 	protected Vector3Int cellPosition => _gridsnap.GetCellPosition();
 	protected Tilemap tilemap => ParentLevel.Tilemap;
 
+	protected Tile _tile;
+	protected Tile tile => _tile ?? (_tile = ScriptableObject.CreateInstance<Tile>());
+
 	private bool _isFalling = false;
 	public bool IsFalling => _isFalling;
 
@@ -43,10 +46,13 @@ public class FallingRock : MonoBehaviour, IInteractible
 		{
 			_gridsnap.MoveCells(Vector3Int.down, _fallTickLength);
 			_isFalling = true;
+			tilemap.SetTile(_gridsnap.GetCellPosition(), null);
 		}
 		else
 		{
 			_isFalling = false;
+			if(!tilemap.HasTile(_gridsnap.GetCellPosition()))
+				tilemap.SetTile(_gridsnap.GetCellPosition(), tile);
 		}
 	}
 

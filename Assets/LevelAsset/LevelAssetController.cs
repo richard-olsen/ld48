@@ -8,4 +8,9 @@ public class LevelAssetController : MonoBehaviour
 	[SerializeField]
 	private Tilemap _tilemap;
 	public Tilemap Tilemap => _tilemap;
+
+	public void OnLevelLoad()
+	{
+
+	}
 }
