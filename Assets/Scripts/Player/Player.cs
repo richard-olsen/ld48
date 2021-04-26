@@ -132,7 +132,15 @@ public class Player : GridAlignedEntity, IDamageable
         IEnumerator gameOverScreen()
         {
             yield return new WaitForSeconds(1.5f);
-            SceneManager.LoadScene("Scenes/GameOver");
+
+
+            // Make sure the player is still dead
+            // Even though the player can't move, there could
+            // be a case where the player got an air bubble
+            // at the exact moment they hit 0 oxygen
+            // Just to be nice to the player :)
+            if (!IsAlive)
+                SceneManager.LoadScene("Scenes/GameOver");
         }
         StartCoroutine(gameOverScreen());
 	}
