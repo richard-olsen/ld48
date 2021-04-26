@@ -6705,6 +6705,132 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01dea6d280c66364b898a1c5e7023d8a, type: 3}
+--- !u!1001 &943704463618215368
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2018248280748218228}
+    m_Modifications:
+    - target: {fileID: 9214084260501838267, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_Name
+      value: MessageTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838276, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: _message
+      value: "To move, use the <color=#FE7842>arrow keys</color>, and keep an eye
+        on the <color=#FFD700>turn counter</color> to the bottom left of the Screen.
+        \nPress <color=#FE7842>Space</color> to Continue."
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+--- !u!1001 &1218310426442106895
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2018248280748218228}
+    m_Modifications:
+    - target: {fileID: 9214084260501838267, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_Name
+      value: MessageTrigger (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838276, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: _message
+      value: Refill your <color=#FFD700>oxygen meter</color> in the bottom left of
+        the screen by collecting <color=#FFD700>bubbles</color>. If you run out of
+        oxygen, you will drown.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
 --- !u!1001 &1268346955587579185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6896,6 +7022,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01dea6d280c66364b898a1c5e7023d8a, type: 3}
+--- !u!1001 &4083790900341772741
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2018248280748218228}
+    m_Modifications:
+    - target: {fileID: 9214084260501838267, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_Name
+      value: MessageTrigger (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838276, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: _message
+      value: Interact with objects by opening the menu with <color=#FE7842>spacebar</color>
+        and selecting "interact" with the <color=#FE7842>arrow keys and spacebar</color>.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214084260501838277, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0fa68f74179c22a41ab4e3ee8979ac23, type: 3}
 --- !u!1001 &5081444329327840983
 PrefabInstance:
   m_ObjectHideFlags: 0

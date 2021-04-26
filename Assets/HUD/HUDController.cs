@@ -60,6 +60,11 @@ public class HUDController : MonoBehaviour
 	[SerializeField]
 	private AudioClip _hit;
 
+	public static void ShowMessage(string message)
+	{
+		HUD._messages.ShowMessage(message);
+	}
+
 	public static void Noise_Select() {
 		HUD._audio.clip = HUD._select;
 		HUD._audio.loop = false;
