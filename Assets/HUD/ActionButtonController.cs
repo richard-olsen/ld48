@@ -47,6 +47,8 @@ public class ActionButtonController : MonoBehaviour
 	/// </summary>
 	public void RefreshActionData()
 	{
+		if (_playerAction == null)
+			return;
 		Text = _playerAction.ActionTitle;
 	}
 

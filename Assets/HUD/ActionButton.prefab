@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598b8bcc1e4844c468f40b8a517131ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hudParent: {fileID: 0}
   _playerAction: {fileID: 11400000, guid: 47cc4dae57026e94d929f7332c41bb84, type: 2}
   _button: {fileID: 4439086986975789595}
   _text: {fileID: 466925166006304259}
@@ -241,7 +242,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: -40
+  m_lineSpacing: -50
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
