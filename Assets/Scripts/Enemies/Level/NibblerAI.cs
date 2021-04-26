@@ -24,7 +24,7 @@ public class NibblerAI : GridEnemyBase
 
     private bool MadeItToTarget()
     {
-        return position == targetPositions[nextPatrolPoint];
+        return playerPosAI == targetPositions[nextPatrolPoint];
     }
 
     public override int DoActions(int actionsLeft)
@@ -68,7 +68,7 @@ public class NibblerAI : GridEnemyBase
 
             if (path.Count == 0)
             {
-                player.DepleteOxygen(damageToDeal);
+                player.Damage(damageToDeal);
                 return 1;
             }
         }
@@ -90,7 +90,7 @@ public class NibblerAI : GridEnemyBase
                 Debug.Log("Pathfinding target...");
                 lastPatrolPoint = nextPatrolPoint;
 
-                Vector2Int nextPos = targetPositions[nextPatrolPoint];
+                Vector2Int nextPos = targetPositions[nextPatrolPoint] + turnBased.LevelTileOffset;
 
                 path = pathfinder.FindPath(position.x, position.y, nextPos.x, nextPos.y);
 #if UNITY_EDITOR
