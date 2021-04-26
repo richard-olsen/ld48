@@ -30,12 +30,12 @@ public class TurnInfoController : MonoBehaviour
 
 	private void Update()
 	{
-		_turnCountText.text = TurnSystem.PlayerActionsLeft.ToString();
+		_turnCountText.text = Mathf.Max(TurnSystem.PlayerActionsLeft, 0).ToString();
 
 		// player turn
 		if (TurnSystem.PlayerActionsLeft > 0)
 		{
-			_turnStateText.color = _oCol; ;
+			_turnStateText.color = _oCol;
 			_turnStateText.text = playerTurnText;
 		}
 
