@@ -206,7 +206,7 @@ MonoBehaviour:
   m_text: Spear Gun
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 836581e5b0fa57d49b8d39f4b73917a4, type: 2}
-  m_sharedMaterial: {fileID: 1775957587144667684, guid: 836581e5b0fa57d49b8d39f4b73917a4, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 953f59c85cc9c9240a1b3590d3cfccd3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
