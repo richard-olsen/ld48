@@ -93,9 +93,34 @@ public class TurnBasedMovementSystem : MonoBehaviour
         ResetMoves();
     }
 
+    private void RemoveQueuedEnemies()
+    {
+        // Remove all dead enemies or enemies that need to be removed
+
+        while (removeEnemy.Count > 0)
+        {
+            RemoveEnemyEntry enemy = removeEnemy.Dequeue();
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].enemy == enemy.enemy)
+                {
+                    Debug.Log("Remove Enemy");
+                    enemies.RemoveAt(i);
+
+                    if (enemy.removeFromWorld && enemy.enemy != null)
+                        Destroy(enemy.enemy.gameObject);
+
+                    break;
+                }
+            }
+        }
+    }
+
     void Update()
     {
         aiTimer += Time.deltaTime;
+
+        RemoveQueuedEnemies();
 
         if (playerActionsLeft > 0 || enemies.Count == 0)
         {
@@ -108,6 +133,8 @@ public class TurnBasedMovementSystem : MonoBehaviour
 
             return;
         }
+
+        RemoveQueuedEnemies();
 
         for (int i = 0; i < enemies.Count; i++)
         {
@@ -130,25 +157,7 @@ public class TurnBasedMovementSystem : MonoBehaviour
             return;
         }
 
-        // Remove all dead enemies or enemies that need to be removed
-
-        while (removeEnemy.Count > 0)
-        {
-            RemoveEnemyEntry enemy = removeEnemy.Dequeue();
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                if (enemies[i].enemy == enemy.enemy)
-                {
-                    Debug.Log("Remove Enemy");
-                    enemies.RemoveAt(i);
-
-                    if (enemy.removeFromWorld && enemy.enemy != null)
-                        Destroy(enemy.enemy.gameObject);
-
-                    break;
-                }
-            }
-        }
+        
 
         ResetMoves();
     }
