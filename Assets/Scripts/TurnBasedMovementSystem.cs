@@ -13,6 +13,7 @@ public class TurnBasedMovementSystem : MonoBehaviour
 
     // getter for player actions left
     public int PlayerActionsLeft => playerActionsLeft;
+    public bool IsPlayersTurn => playerActionsLeft > 0 || enemies.Count <= 0;
 
     [SerializeField]
     private int enemiesAllowedMoves = 2;

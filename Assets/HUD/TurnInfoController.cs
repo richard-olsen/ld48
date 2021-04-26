@@ -33,7 +33,7 @@ public class TurnInfoController : MonoBehaviour
 		_turnCountText.text = Mathf.Max(TurnSystem.PlayerActionsLeft, 0).ToString();
 
 		// player turn
-		if (TurnSystem.PlayerActionsLeft > 0)
+		if (TurnSystem.IsPlayersTurn)
 		{
 			_turnStateText.color = _oCol;
 			_turnStateText.text = playerTurnText;

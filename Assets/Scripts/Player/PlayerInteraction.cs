@@ -260,7 +260,7 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 	private void interact()
 	{
 		// do nothing if it's not the player's turn
-		if (TurnSystem.PlayerActionsLeft <= 0)
+		if (!TurnSystem.IsPlayersTurn)
 		{
 			// close any menus and stop interacting if they are doing something
 			if (_interactMode != PlayerInteractMode.OpenMenu)
