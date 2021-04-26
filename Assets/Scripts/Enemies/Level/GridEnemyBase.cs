@@ -42,6 +42,12 @@ public abstract class GridEnemyBase : GridAlignedEntity, IDamageable
     /// </summary>
     public bool IsAlive => _health > 0;
 
+    public virtual void KnockBack(Vector2Int kb)
+	{
+        if (!MoveAlongGrid(kb.x, 0)) 
+            MoveAlongGrid(0, kb.y);
+	}
+
     /// <summary>
     /// causes the enemy to take damage
     /// </summary>

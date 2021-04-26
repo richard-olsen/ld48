@@ -19,6 +19,10 @@ public class Player : GridAlignedEntity, IDamageable
     private float oxygenLevel; // is set in Start()
 
     [SerializeField]
+    private float _meleeDamage = 5;
+    public float MeleeDamage => _meleeDamage;
+
+    [SerializeField]
     private Animator playerAnimator;
 
     [SerializeField]
@@ -104,6 +108,12 @@ public class Player : GridAlignedEntity, IDamageable
             playerAnimator.SetFloat("animY", 0);
         }
     }
+
+    public void KnockBack(Vector2Int kb)
+	{
+        if (!MoveAlongGrid(kb.x, 0))
+            MoveAlongGrid(0, kb.y);
+	}
 
     public void Damage(float damage)
 	{
