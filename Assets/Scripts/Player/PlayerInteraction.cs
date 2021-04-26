@@ -319,6 +319,8 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 			{
 				foreach(Collider2D col in colliders)
 				{
+					if (col.isTrigger)
+						continue;
 					if(col.gameObject.GetComponent<Player>() != null)
 					{
 						playerInWay = true;
