@@ -6739,6 +6739,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nibbler
       objectReference: {fileID: 0}
+    - target: {fileID: 2126235325313070463, guid: 891b9c587b928e54d8da83ae8b5885e7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 891b9c587b928e54d8da83ae8b5885e7, type: 3}
 --- !u!1001 &7478089876598492503
