@@ -11,6 +11,9 @@ public class TurnBasedMovementSystem : MonoBehaviour
     private int playerAllowedMoves = 3;
     private int playerActionsLeft;
 
+    // getter for player actions left
+    public int PlayerActionsLeft => playerActionsLeft;
+
     [SerializeField]
     private int enemiesAllowedMoves = 2;
 
