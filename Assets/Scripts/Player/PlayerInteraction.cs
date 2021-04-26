@@ -50,6 +50,9 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 
 	public void EndInteractCycle()
 	{
+		if (actionButtons.gameObject.activeInHierarchy)
+			actionButtons.Close();
+
 		_interactMode = PlayerInteractMode.OpenMenu;
 		PlayerComponent.usingMenus = false;
 		WorldCursor.gameObject.SetActive(false);
@@ -85,6 +88,14 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 
 			// wait for some time
 			yield return new WaitForSecondsRealtime(0.1f);
+
+			if(action == null)
+			{
+				EndInteractCycle();
+
+				// return
+				yield break;
+			}
 
 			_currentAction = action;
 			switch (action.ActionType)
