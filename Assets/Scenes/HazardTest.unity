@@ -343,10 +343,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MessageBackdrop2
       objectReference: {fileID: 0}
-    - target: {fileID: 6448191814650747249, guid: 966bd4a2a6ec87d4992c8f5a8933c77c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7802483217615982497, guid: 966bd4a2a6ec87d4992c8f5a8933c77c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
