@@ -65,6 +65,7 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 		_interactMode = PlayerInteractMode.SelectWorld;
 		PlayerComponent.usingMenus = true;
 		WorldCursor.transform.parent = CurrentLevel.transform;
+		WorldCursor.ParentLevel = CurrentLevel;
 		WorldCursor.gameObject.SetActive(true);
 		WorldCursor.transform.position = transform.position;
 		WorldCursor.SnapToGrid();

@@ -10,7 +10,10 @@ public class GridSnap : MonoBehaviour
 	public static readonly float maxCellDistance = 0.01f;
 
 	private LevelAssetController _parentLevel;
-	public LevelAssetController ParentLevel => _parentLevel ?? (_parentLevel = transform.GetComponentInParent<LevelAssetController>());
+	public LevelAssetController ParentLevel {
+		get => _parentLevel ?? (_parentLevel = transform.GetComponentInParent<LevelAssetController>());
+		set => _parentLevel = value;
+	}
 
 	[SerializeField]
 	private bool _removeOnStart = false;
