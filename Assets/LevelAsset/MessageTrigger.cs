@@ -16,6 +16,7 @@ public class MessageTrigger : MonoBehaviour
 		if((collision.gameObject.layer | _layers.value) > 0)
 		{
 			HUDController.ShowMessage(_message);
+			Destroy(gameObject);
 		}
 	}
 }

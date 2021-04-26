@@ -92,9 +92,17 @@ public class GridAlignedEntity : MonoBehaviour
         // Do some ray casting to see if entity can move into slot
         // Try to move to another slot if possible
         // Assuming everything is a bounding box filling the entire single grid space
-        RaycastHit2D rays = Physics2D.Raycast(new Vector2(targetPosition.x, targetPosition.y), new Vector2(xOffset, yOffset).normalized, 1.0f, LayerMask.GetMask("Default"));
+        RaycastHit2D[] hits = Physics2D.RaycastAll(new Vector2(targetPosition.x, targetPosition.y), new Vector2(xOffset, yOffset).normalized, 1.0f, LayerMask.GetMask("Default"));
 
-        if (rays.collider != null && !rays.collider.isTrigger) // Has collision
+        bool solidCol = false;
+        foreach(RaycastHit2D rch in hits)
+		{
+            if (rch.collider.isTrigger)
+                continue;
+            solidCol = true;
+		}
+
+        if (solidCol) // Has collision
         {
             return false;
         }
