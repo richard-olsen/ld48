@@ -39,6 +39,10 @@ public class HUDController : MonoBehaviour
 	public Canvas CanvasComponent => _canvas ?? (_canvas = GetComponent<Canvas>());
 
 	[SerializeField]
+	private MessageController _messages;
+	public MessageController Messages => _messages;
+
+	[SerializeField]
 	private OxyMeterController _oxyMeterController = null;
 	[SerializeField]
 	private ActionContainerController _actionButtonContainer = null;
