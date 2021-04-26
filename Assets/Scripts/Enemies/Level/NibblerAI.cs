@@ -24,7 +24,7 @@ public class NibblerAI : GridEnemyBase
 
     private bool MadeItToTarget()
     {
-        return playerPosAI == targetPositions[nextPatrolPoint];
+        return PositionAI == targetPositions[nextPatrolPoint];
     }
 
     public override int DoActions(int actionsLeft)
