@@ -87,7 +87,9 @@ public class LevelTransition : MonoBehaviour
 		// create the level instance if it has not been instantiated yet
 		if (_targetLevelInstance == null)
 		{
+			// instantiate and load the level
 			_targetLevelInstance = Instantiate(_targetLevelPrefab);
+			_targetLevelInstance.OnLevelLoad();
 
 			// get the target transition of the level INSTANCE, not the prefab
 			target = targetTransition;

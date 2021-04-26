@@ -488,26 +488,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LitCamera
       objectReference: {fileID: 0}
-    - target: {fileID: 6482239246702203638, guid: 36d7e2bd17235714b8b832dfc20277db, type: 3}
-      propertyPath: orthographic size
-      value: 7.4797297
-      objectReference: {fileID: 0}
-    - target: {fileID: 6482239246702203638, guid: 36d7e2bd17235714b8b832dfc20277db, type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6482239246702203638, guid: 36d7e2bd17235714b8b832dfc20277db, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6482239246702203638, guid: 36d7e2bd17235714b8b832dfc20277db, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.5686275
-      objectReference: {fileID: 0}
-    - target: {fileID: 6482239246702203638, guid: 36d7e2bd17235714b8b832dfc20277db, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.28627452
-      objectReference: {fileID: 0}
     - target: {fileID: 6482239247580194441, guid: 36d7e2bd17235714b8b832dfc20277db, type: 3}
       propertyPath: m_Color.g
       value: 0.85490197
@@ -576,6 +556,10 @@ PrefabInstance:
     - target: {fileID: 2018248280748218230, guid: b02141c8572899841b1a8b339e9dc5f2, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122657973186770994, guid: b02141c8572899841b1a8b339e9dc5f2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b02141c8572899841b1a8b339e9dc5f2, type: 3}

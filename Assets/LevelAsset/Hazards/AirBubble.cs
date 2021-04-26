@@ -60,7 +60,8 @@ public class AirBubble : MonoBehaviour, IDamageable, IInteractible
 
 	private void Update()
 	{
-		handleFloatUp();
+		if (_floatUpward)
+			handleFloatUp();
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)

@@ -23,7 +23,11 @@ public class Pathfinding
         public int indexX;
         public int indexY;
 
-        public bool isEmpty;
+        public bool wasEmpty;
+        public bool isEmptyNode(Tilemap tm)
+		{
+            return !tm.HasTile(new Vector3Int(x, y, 0));
+		}
 
         public int CostG;
         public int CostH;
@@ -34,7 +38,7 @@ public class Pathfinding
     private int xOffset;
     private int yOffset;
 
-
+    private Tilemap tilemap;
     private PathNode[,] nodes;
     private int sizeX;
     private int sizeY;
@@ -45,6 +49,7 @@ public class Pathfinding
 
     public Pathfinding(Tilemap tiles)
     {
+        tilemap = tiles;
         BoundsInt size = tiles.cellBounds;
 
         xOffset = size.xMin;
@@ -67,7 +72,7 @@ public class Pathfinding
                 node.indexY = j;
                 node.x = x;
                 node.y = y;
-                node.isEmpty = tiles.GetTile(new Vector3Int(x, y, 0)) == null;
+                node.wasEmpty = tiles.GetTile(new Vector3Int(x, y, 0)) == null;
             }
         }
     }
@@ -110,7 +115,7 @@ public class Pathfinding
                 if (closed.Contains(neighbor))
                     continue;
 
-                if (!neighbor.isEmpty)
+                if (!neighbor.isEmptyNode(tilemap))
                 {
                     closed.Add(neighbor);
                     continue;
