@@ -61,6 +61,7 @@ public abstract class GridEnemyBase : GridAlignedEntity, IDamageable
     public virtual void Damage(float damage)
     {
         Instantiate(_hitPrefab, transform.position + Vector3.back, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+        HUDController.Noise_Hit();
 
         _health -= damage;
 		if (!IsAlive)

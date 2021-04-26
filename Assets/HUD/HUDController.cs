@@ -26,6 +26,7 @@ public class HUDController : MonoBehaviour
 	public static HUDController HUD => _hud;
 
 	private AudioSource _audio;
+	private AudioSource _audio2;
 
 	[SerializeField]
 	private EventSystem _eventSys;
@@ -52,6 +53,8 @@ public class HUDController : MonoBehaviour
 	private AudioClip _submitValid;
 	[SerializeField]
 	private AudioClip _submitInvalid;
+	[SerializeField]
+	private AudioClip _hit;
 
 	public static void Noise_Select() {
 		HUD._audio.clip = HUD._select;
@@ -73,11 +76,19 @@ public class HUDController : MonoBehaviour
 		HUD._audio.Play();
 	}
 
+	public static void Noise_Hit()
+	{
+		HUD._audio2.clip = HUD._hit;
+		HUD._audio2.loop = false;
+		HUD._audio2.Play();
+	}
+
 	#region Unity Messages
 
 	private void Start() {
 		_hud = this;
 		_audio = gameObject.AddComponent<AudioSource>();
+		_audio2 = gameObject.AddComponent<AudioSource>();
 		Player.GetComponent<PlayerInteraction>().HUD = this;
 	}
 
