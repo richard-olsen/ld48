@@ -139,7 +139,7 @@ public class TurnBasedMovementSystem : MonoBehaviour
             {
                 if (enemies[i].enemy == enemy.enemy)
                 {
-                    Debug.Log("Remove Enemny");
+                    Debug.Log("Remove Enemy");
                     enemies.RemoveAt(i);
 
                     if (enemy.removeFromWorld)
