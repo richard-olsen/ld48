@@ -187,6 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c32de9c865eed4fa62a4e860b5a6bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _removeOnStart: 0
+  _gridSubdivistions: 1
   autoSnap: 1
   slerp: 0
   autoSnapTime: 0.1
