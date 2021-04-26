@@ -90,6 +90,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59e8b3400b70c2048b301b1e5f95d1c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _messageText: {fileID: 0}
+  _spacebarImage: {fileID: 0}
+  _spacebarUp: {fileID: 0}
+  _spacebarPressed: {fileID: 0}
 --- !u!114 &1831332783236134193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +106,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59e8b3400b70c2048b301b1e5f95d1c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _messageText: {fileID: 7300079233677120789}
+  _spacebarImage: {fileID: 4281865502161217795}
+  _spacebarUp: {fileID: -472828771120783621, guid: 0363880fd78a14a4cabd2037e466d066, type: 3}
+  _spacebarPressed: {fileID: 4178976537857523491, guid: 0363880fd78a14a4cabd2037e466d066, type: 3}
 --- !u!1 &919851787706086548
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +141,7 @@ RectTransform:
   m_Children:
   - {fileID: 7223704243357111140}
   m_Father: {fileID: 7633607414064589303}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -190,7 +198,7 @@ GameObject:
   - component: {fileID: 7044102109829090714}
   - component: {fileID: 7300079233677120789}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MessageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,7 +216,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7633607414064589303}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -343,8 +351,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5040327493030387722}
   - {fileID: 1857823190369015163}
+  - {fileID: 5040327493030387722}
   m_Father: {fileID: 6192664280137953802}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
