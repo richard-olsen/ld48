@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 0}
+  _hitPrefab: {fileID: 6757417036536225156, guid: c872e0194af9dbc46a14800dca612e0b, type: 3}
   _maxHealth: 10
   circle: {fileID: 5657361822586629898}
   radius: 4

@@ -11,6 +11,8 @@ public class Player : GridAlignedEntity, IDamageable
     public bool CanBeDamaged => true;
     public bool IsAlive => Health > 0;
 
+    [SerializeField]
+    private GameObject _hitPrefab;
 
     // I'll leave these as integers for now
     // no.
@@ -67,7 +69,7 @@ public class Player : GridAlignedEntity, IDamageable
 
             if (MoveAlongGrid(moveX, moveY))
             {
-                Damage(movementOxygenCost);
+                DepleteOxygen(movementOxygenCost);
                 return 1;
             }
         }
@@ -121,6 +123,8 @@ public class Player : GridAlignedEntity, IDamageable
             GiveOxygen(-damage);
         else
             DepleteOxygen(damage);
+
+        Instantiate(_hitPrefab, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
 
         // kill if health/oxygen goes to or below 0
         if (!IsAlive)
