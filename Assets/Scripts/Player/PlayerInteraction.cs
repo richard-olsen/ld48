@@ -14,6 +14,9 @@ public enum PlayerInteractMode
 [RequireComponent(typeof(Player))]
 public class PlayerInteraction : MonoBehaviour, IInteractor
 {
+	private TurnBasedMovementSystem _turnSystem;
+	public TurnBasedMovementSystem TurnSystem => _turnSystem ?? (_turnSystem = FindObjectOfType<TurnBasedMovementSystem>());
+
 	private LevelAssetController _currentLevel;
 	public LevelAssetController CurrentLevel
 	{
@@ -188,8 +191,8 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 			}
 
 			// if no enemy was hit, we end the interaction cycle
-			if (!hitEnemy)
-				EndInteractCycle();
+			//if (!hitEnemy)
+			EndInteractCycle();
 		}
 	}
 
@@ -250,6 +253,7 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 
 	private void interact()
 	{
+
 
 		switch (_interactMode)
 		{
@@ -390,6 +394,7 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 
 	private void OnEnable()
 	{
+		_turnSystem = FindObjectOfType<TurnBasedMovementSystem>();
 		transform.parent = CurrentLevel.transform;
 
 		if(_worldCursor == null)
