@@ -8,20 +8,23 @@ public class GridAlignedEntity : MonoBehaviour
     protected Vector3 targetPosition;
     private Vector3 oldPosition;
 
+    protected static float interpolateLength = 0.2f;
+    public static float InterpolateLength => interpolateLength;
+
     protected float interpolateTime = 1.0f;
 
     protected void UpdatePositions()
     {
-        if (interpolateTime >= 1.0f)
+        if (interpolateTime >= interpolateLength)
         {
             oldPosition = targetPosition;
             transform.position = targetPosition;
             return;
         }
 
-        transform.position = Vector3.Lerp(oldPosition, targetPosition, interpolateTime);
+        transform.position = Vector3.Lerp(oldPosition, targetPosition, interpolateTime / interpolateLength);
 
-        interpolateTime += Time.deltaTime * 3.0f;
+        interpolateTime += Time.deltaTime;
     }
 
     public void SnapToGrid()
@@ -80,7 +83,7 @@ public class GridAlignedEntity : MonoBehaviour
     {
         if (xOffset == 0 && yOffset == 0)
             return false;
-        if (interpolateTime < 1.0f)
+        if (interpolateTime < interpolateLength)
             return false;
 
         if (xOffset != 0)

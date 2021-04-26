@@ -25,10 +25,11 @@ public class SquidyAI : GridEnemyBase
     IEnumerator CircleVisual()
     {
         circle.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(GridAlignedEntity.interpolateLength * 3 + 0.1f);
         circle.SetActive(false);
 
     }
+
     public override int DoActions(int actionsLeft)
     {
         if (PlayerDistance <= radius && actionsLeft >= 2)

@@ -26,7 +26,6 @@ public class TurnBasedMovementSystem : MonoBehaviour
 
     private List<EnemyEntry> enemies;
 
-
     public class RemoveEnemyEntry
     {
         public GridEnemyBase enemy;
@@ -36,6 +35,7 @@ public class TurnBasedMovementSystem : MonoBehaviour
     private Queue<RemoveEnemyEntry> removeEnemy;
 
     private float aiTimer = 0;
+    private static float aiWait = 0.1f;
 
     public void AddEnemy(GridEnemyBase enemy)
     {
@@ -148,7 +148,7 @@ public class TurnBasedMovementSystem : MonoBehaviour
                 continue;
             }
 
-            if (aiTimer < 1.0f)
+            if (aiTimer < GridAlignedEntity.InterpolateLength + aiWait)
                 return;
 
             aiTimer = 0;
@@ -160,7 +160,6 @@ public class TurnBasedMovementSystem : MonoBehaviour
             return;
         }
 
-        
 
         ResetMoves();
     }
