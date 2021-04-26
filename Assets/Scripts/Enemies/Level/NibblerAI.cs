@@ -85,7 +85,7 @@ public class NibblerAI : GridEnemyBase
                     nextPatrolPoint = 0;
             }
 
-            if (lastPatrolPoint != nextPatrolPoint || path.Count == 0)
+            if (lastPatrolPoint != nextPatrolPoint || path == null || path.Count == 0)
             {
                 Debug.Log("Pathfinding target...");
                 lastPatrolPoint = nextPatrolPoint;
