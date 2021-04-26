@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6192664280137953802}
   - component: {fileID: 442435579876750088}
   - component: {fileID: 764027092516955908}
-  - component: {fileID: 4344288723441916885}
   - component: {fileID: 1831332783236134193}
   m_Layer: 5
   m_Name: MessageBackdrop
@@ -78,22 +77,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4344288723441916885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 547469614484615533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59e8b3400b70c2048b301b1e5f95d1c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _messageText: {fileID: 0}
-  _spacebarImage: {fileID: 0}
-  _spacebarUp: {fileID: 0}
-  _spacebarPressed: {fileID: 0}
 --- !u!114 &1831332783236134193
 MonoBehaviour:
   m_ObjectHideFlags: 0
