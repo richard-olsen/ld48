@@ -79,6 +79,8 @@ public class LevelTransition : MonoBehaviour
 		if (_isTransitioning)
 			return;
 
+		_parentLevel.OnLevelUnload();
+
 		// get the target transition of the prefab
 		LevelTransition target = targetTransition;
 		LevelAssetController trgLev = _targetLevelInstance ?? _targetLevelPrefab;
@@ -89,6 +91,7 @@ public class LevelTransition : MonoBehaviour
 		{
 			// instantiate and load the level
 			_targetLevelInstance = Instantiate(_targetLevelPrefab);
+			_targetLevelInstance.turnSystem = plr.GetComponent<PlayerInteraction>().TurnSystem;
 			_targetLevelInstance.OnLevelLoad();
 
 			// get the target transition of the level INSTANCE, not the prefab

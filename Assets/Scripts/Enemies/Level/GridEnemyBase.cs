@@ -78,23 +78,32 @@ public abstract class GridEnemyBase : GridAlignedEntity, IDamageable
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         Assert.IsNotNull(playerObject, "A player must exist in the scene!");
 
-        GameObject turnBaseController = GameObject.FindGameObjectWithTag("TurnBaseController");
-        Assert.IsNotNull(turnBaseController, "A turn based controller must exist in the scene!");
 
         player = playerObject.GetComponent<Player>();
         Assert.IsNotNull(player, "Player GameObject REQUIRES the Player class! Are you using the prefab?");
-
-        turnBased = turnBaseController.GetComponent<TurnBasedMovementSystem>();
-        Assert.IsNotNull(turnBased, "TurnBasedController REQUIRES the class! Are you using the prefab?");
-
-        turnBased.AddEnemy(this);
 
         _health = _maxHealth;
 
         SnapToGrid();
     }
 
-    protected void FixedUpdate()
+    private void OnEnable()
+    {
+        GameObject turnBaseController = GameObject.FindGameObjectWithTag("TurnBaseController");
+        Assert.IsNotNull(turnBaseController, "A turn based controller must exist in the scene!");
+
+        turnBased = turnBaseController.GetComponent<TurnBasedMovementSystem>();
+        Assert.IsNotNull(turnBased, "TurnBasedController REQUIRES the class! Are you using the prefab?");
+
+        turnBased.AddEnemy(this);
+    }
+
+    private void OnDisable()
+	{
+        turnBased.RemoveEnemy(this, false);
+    }
+
+	protected void FixedUpdate()
     {
         playerPos.x = player.GetX();
         playerPos.y = player.GetY();

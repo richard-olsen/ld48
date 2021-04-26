@@ -9,7 +9,14 @@ public class LevelAssetController : MonoBehaviour
 	private Tilemap _tilemap;
 	public Tilemap Tilemap => _tilemap;
 
+	public TurnBasedMovementSystem turnSystem;
+
 	public void OnLevelLoad()
+	{
+
+	}
+
+	public void OnLevelUnload()
 	{
 
 	}
