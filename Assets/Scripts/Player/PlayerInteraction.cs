@@ -30,6 +30,9 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 		}
 	}
 
+	private GridSnap _gridSnap;
+	public GridSnap GridSnapComponent => _gridSnap ?? (_gridSnap = GetComponent<GridSnap>());
+
 	private Player _playerComponent;
 	public Player PlayerComponent => _playerComponent ?? (_playerComponent = GetComponent<Player>());
 
@@ -47,6 +50,73 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 	private PlayerInteractMode _interactMode = PlayerInteractMode.OpenMenu;
 	private GridSnap _worldCursor = null;
 	public GridSnap WorldCursor => _worldCursor;
+
+	private int sign(int num)
+	{
+		if (num == 0)
+			return 0;
+		return (int)Mathf.Sign(num);
+	}
+
+	public Vector2Int GetKnockBackDirAt(Vector2Int target)
+	{
+		// get the difference between the player and target
+		Vector2Int dif = (Vector2Int)GridSnapComponent.GetCellPosition();
+		dif = target - dif;
+
+		// prefer horizontal knockback over vertical
+		int oY = sign(dif.y);
+		if(Mathf.Abs(dif.x) <= 0)
+		{
+			dif.y = 0;
+		}
+		dif.x = sign(dif.x);
+
+		// get the world position of the knockback target
+		Vector2 worldTarget = 
+			CurrentLevel.Tilemap.layoutGrid.CellToWorld(
+				(Vector3Int)(target + dif)
+			) + GridSnapComponent.cellOffset;
+
+		// get all the collisions in the knowckback target
+		Collider2D[] cols = Physics2D.OverlapBoxAll(worldTarget, new Vector2(0.9f, 0.9f), 0);
+		bool canKnockback = true;
+		foreach (Collider2D col in cols)
+		{
+			if (col.isTrigger)
+				continue;
+			canKnockback = false;
+		}
+		
+		if(canKnockback)
+			return dif;
+
+		if (oY == 0)
+			return Vector2Int.zero;
+
+		dif.y += oY;
+
+		// get the world position of the knockback target
+		worldTarget =
+			CurrentLevel.Tilemap.layoutGrid.CellToWorld(
+				(Vector3Int)(target + dif)
+			) + GridSnapComponent.cellOffset;
+
+		// get all the collisions in the knockback target
+		cols = Physics2D.OverlapBoxAll(worldTarget, new Vector2(0.9f, 0.9f), 0);
+		canKnockback = true;
+		foreach (Collider2D col in cols)
+		{
+			if (col.isTrigger)
+				continue;
+			canKnockback = false;
+		}
+
+		if (canKnockback)
+			return dif;
+
+		return Vector2Int.zero;
+	}
 
 	public void EndInteractCycle()
 	{
@@ -70,49 +140,6 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 		WorldCursor.transform.position = transform.position;
 		WorldCursor.SnapToGrid();
 		HUD.WorldScreenCursor.Show(0);
-	}
-
-	public void SelectInteractible(IInteractible interactible)
-	{
-		_currentInteractible = interactible;
-		_interactMode = PlayerInteractMode.Interactible;
-		HUD.WorldScreenCursor.Show(1);
-	}
-
-	public void SelectPlayerAction(PlayerAction action)
-	{
-		// this needs to be done in the next frame otherwise the interaction input "double clicks"
-		// and sometimes causes the player to not be able to do any action
-
-		// do inside a coroutine
-		IEnumerator doNextFrame(){
-
-			// wait for some time
-			yield return new WaitForSecondsRealtime(0.1f);
-
-			if(action == null)
-			{
-				EndInteractCycle();
-
-				// return
-				yield break;
-			}
-
-			_currentAction = action;
-			switch (action.ActionType)
-			{
-				case PlayerActionType.Interact:
-					StartSelectWorld();
-					actionButtons.Close();
-					break;
-			}
-
-			// stop coroutine
-			yield break;
-		}
-
-		// start the coroutine so that this action does not occur until next frame
-		StartCoroutine(doNextFrame());
 	}
 
 	private void selectWorld(Vector3Int cellPos)
@@ -139,6 +166,78 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 			if (!interacted)
 				EndInteractCycle();
 		}
+
+		else if (CurrentAction.ActionType == PlayerActionType.Attack_Melee)
+		{
+			//find any damageables in the selected grid position
+			Vector3 selectPos = CurrentLevel.Tilemap.layoutGrid.CellToWorld(cellPos) + CurrentLevel.Tilemap.layoutGrid.cellSize * 0.5f;
+			Collider2D[] colliders = Physics2D.OverlapBoxAll(selectPos, new Vector2(0.9f, 0.9f), 0);
+			bool hitEnemy = false;
+			for (int i = colliders.Length - 1; i >= 0; i--)
+			{
+				Collider2D collider = colliders[i];
+				IDamageable db = collider.GetComponent<IDamageable>();
+				if (db != null)
+				{
+					// interact with the interactible object that was found
+					db.Damage(PlayerComponent.MeleeDamage);
+					db.KnockBack(GetKnockBackDirAt((Vector2Int)cellPos));
+					hitEnemy = true;
+					break;
+				}
+			}
+
+			// if no enemy was hit, we end the interaction cycle
+			if (!hitEnemy)
+				EndInteractCycle();
+		}
+	}
+
+	public void SelectInteractible(IInteractible interactible)
+	{
+		_currentInteractible = interactible;
+		_interactMode = PlayerInteractMode.Interactible;
+		HUD.WorldScreenCursor.Show(1);
+	}
+
+	public void SelectPlayerAction(PlayerAction action)
+	{
+		// this needs to be done in the next frame or later otherwise the interaction input "double clicks"
+		// and causes the player to not be able to do any action
+
+		// do inside a coroutine
+		IEnumerator doLater(){
+
+			// wait for some time
+			yield return new WaitForSecondsRealtime(0.1f);
+
+			if(action == null)
+			{
+				EndInteractCycle();
+
+				// return
+				yield break;
+			}
+
+			_currentAction = action;
+			switch (action.ActionType)
+			{
+				case PlayerActionType.Interact:
+					StartSelectWorld();
+					actionButtons.Close();
+					break;
+				case PlayerActionType.Attack_Melee:
+					StartSelectWorld();
+					actionButtons.Close();
+					break;
+			}
+
+			// stop coroutine
+			yield break;
+		}
+
+		// start the coroutine so that this action does not occur until next frame
+		StartCoroutine(doLater());
 	}
 
 	private void openMenu()
@@ -291,7 +390,8 @@ public class PlayerInteraction : MonoBehaviour, IInteractor
 
 	private void OnEnable()
 	{
-		
+		transform.parent = CurrentLevel.transform;
+
 		if(_worldCursor == null)
 		{
 			_worldCursor = (new GameObject()).AddComponent<GridSnap>();

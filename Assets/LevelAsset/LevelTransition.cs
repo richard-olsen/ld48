@@ -96,7 +96,9 @@ public class LevelTransition : MonoBehaviour
 		}
 
 		// set the player's current level to the new level just transitioned to
-		plr.GetComponent<PlayerInteraction>().CurrentLevel = _targetLevelInstance;
+		PlayerInteraction plrIntr = plr.GetComponent<PlayerInteraction>();
+		plrIntr.CurrentLevel = _targetLevelInstance;
+		plrIntr.transform.transform.parent = _targetLevelInstance.transform;
 
 		// set the level's position to match up with the transition point of this instance
 		_targetLevelInstance.transform.position = transform.position - offset;

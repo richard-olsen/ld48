@@ -26,6 +26,7 @@ public interface IDamageable : IGameObjectable
 	public float Health { get;  }
 	public float MaxHealth { get; }
 
+	public void KnockBack(Vector2Int kb);
 	public void Damage(float damage);
 	public void Kill();
 }

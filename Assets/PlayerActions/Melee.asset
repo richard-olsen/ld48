@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277c8c6d9e6303549aa8a6fc59bc0800, type: 3}
   m_Name: Melee
   m_EditorClassIdentifier: 
+  _actionType: 2
   _actionTitle: Melee
   _oxygenCost: 2

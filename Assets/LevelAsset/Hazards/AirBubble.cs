@@ -28,6 +28,11 @@ public class AirBubble : MonoBehaviour, IDamageable, IInteractible
 		}
 	}
 
+	public void KnockBack(Vector2Int kb)
+	{
+		gridSnap.MoveCells((Vector3Int)kb, 0.2f);
+	}
+
 	public void Damage(float dmg)
 	{
 		Kill();
