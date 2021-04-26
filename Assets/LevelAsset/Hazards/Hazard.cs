@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Hazard : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
-    {
+    [HideInInspector]
+    public bool DisableWhenOutOfLevel = false;
+
+    private void handleDisableCheck()
+	{
+        if (!DisableWhenOutOfLevel)
+            return;
+
         Vector3 min = Camera.main.ViewportToWorldPoint(Camera.main.rect.min);
         Vector3 max = Camera.main.ViewportToWorldPoint(Camera.main.rect.max);
 
@@ -16,9 +21,15 @@ public class Hazard : MonoBehaviour
         vp.size += new Vector2(1, 1);
 
         // if the object falls outside the camera viewport
-		if (!vp.Contains(transform.position))
-		{
+        if (!vp.Contains(transform.position))
+        {
             gameObject.SetActive(false);
-		}
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        handleDisableCheck();
     }
 }
