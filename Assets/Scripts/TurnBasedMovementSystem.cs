@@ -142,7 +142,7 @@ public class TurnBasedMovementSystem : MonoBehaviour
                     Debug.Log("Remove Enemy");
                     enemies.RemoveAt(i);
 
-                    if (enemy.removeFromWorld)
+                    if (enemy.removeFromWorld && enemy.enemy != null)
                         Destroy(enemy.enemy.gameObject);
 
                     break;

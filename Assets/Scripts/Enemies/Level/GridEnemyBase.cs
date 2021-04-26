@@ -61,7 +61,7 @@ public abstract class GridEnemyBase : GridAlignedEntity, IDamageable
     public virtual void Kill()
     {
         turnBased.RemoveEnemy(this, true);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     protected virtual void Start()
