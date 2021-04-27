@@ -21,4 +21,9 @@ public class IntroCutsceneEvent : MonoBehaviour
     {
         SceneManager.LoadScene("Scenes/HazardTest");
     }
+
+    public void GoBackToMenu()
+    {
+        SceneManager.LoadScene("Scenes/Menus");
+    }
 }
