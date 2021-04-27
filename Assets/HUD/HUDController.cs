@@ -59,6 +59,8 @@ public class HUDController : MonoBehaviour
 	private AudioClip _submitInvalid;
 	[SerializeField]
 	private AudioClip _hit;
+	[SerializeField]
+	private AudioClip _bubble;
 
 	public static void ShowMessage(string message)
 	{
@@ -88,6 +90,13 @@ public class HUDController : MonoBehaviour
 	public static void Noise_Hit()
 	{
 		HUD._audio2.clip = HUD._hit;
+		HUD._audio2.loop = false;
+		HUD._audio2.Play();
+	}
+
+	public static void Noise_Bubble()
+	{
+		HUD._audio2.clip = HUD._bubble;
 		HUD._audio2.loop = false;
 		HUD._audio2.Play();
 	}

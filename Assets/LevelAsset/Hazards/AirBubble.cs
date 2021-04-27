@@ -87,6 +87,7 @@ public class AirBubble : MonoBehaviour, IDamageable, IInteractible
 		if(plr != null)
 		{
 			plr.GiveOxygen(_oxygenAmount);
+			HUDController.Noise_Bubble();
 			Kill();
 		}
 	}
