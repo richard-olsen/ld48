@@ -129,6 +129,7 @@ MonoBehaviour:
   _submitValid: {fileID: 8300000, guid: da2e7e92e5e834c45aaa2a5b881a9a0e, type: 3}
   _submitInvalid: {fileID: 8300000, guid: 8f29f8481d046f947b1dd919cd9d6f2b, type: 3}
   _hit: {fileID: 8300000, guid: 3947ec9bc18f7984096932173491a4e1, type: 3}
+  _bubble: {fileID: 8300000, guid: f57974aeb92b27c48afea7193abd1def, type: 3}
 --- !u!114 &1569912901941324300
 MonoBehaviour:
   m_ObjectHideFlags: 0
