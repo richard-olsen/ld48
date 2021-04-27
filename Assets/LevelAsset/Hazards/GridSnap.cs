@@ -11,7 +11,7 @@ public class GridSnap : MonoBehaviour
 
 	private LevelAssetController _parentLevel;
 	public LevelAssetController ParentLevel {
-		get => _parentLevel ?? (_parentLevel = transform.GetComponentInParent<LevelAssetController>());
+		get => (_parentLevel == null || !_parentLevel.gameObject.activeInHierarchy) ? (_parentLevel = transform.GetComponentInParent<LevelAssetController>()) : _parentLevel;
 		set => _parentLevel = value;
 	}
 
