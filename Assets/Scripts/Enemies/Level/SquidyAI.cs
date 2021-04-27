@@ -16,10 +16,10 @@ public class SquidyAI : GridEnemyBase
     {
         base.Start();
 
-        Vector3 scale = circle.transform.localScale;
-        scale.x = radius * 2f;
-        scale.y = radius * 2f;
-        circle.transform.localScale = scale;
+        //Vector3 scale = circle.transform.localScale;
+        //scale.x = radius * 2f;
+        //scale.y = radius * 2f;
+        //circle.transform.localScale = scale;
     }
 
     IEnumerator CircleVisual()
